@@ -2,31 +2,29 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    router.deis.io/domains: basket-stage
-    router.deis.io/maintenance: "False"
-    router.deis.io/ssl.enforce: "False"
-  creationTimestamp: "2018-01-24T22:09:32Z"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"basket-stage"},"name":"basket-nodeport","namespace":"basket-stage"},"spec":{"ports":[{"name":"http","port":80,"targetPort":8000}],"selector":{"app":"basket-stage","type":"web"},"type":"NodePort"}}
+  creationTimestamp: "2018-04-19T08:50:11Z"
   labels:
     app: basket-stage
-    heritage: deis
-    router.deis.io/routable: "true"
-  name: basket-stage
+  name: basket-nodeport
   namespace: basket-stage
-  resourceVersion: "1121087"
-  selfLink: /api/v1/namespaces/basket-stage/services/basket-stage
-  uid: 4176476e-0153-11e8-8c8b-0656fabf84c0
+  resourceVersion: "18758059"
+  selfLink: /api/v1/namespaces/basket-stage/services/basket-nodeport
+  uid: ab9adb60-43ae-11e8-8eeb-0656fabf84c0
 spec:
-  clusterIP: 100.67.220.181
+  clusterIP: 100.71.4.248
+  externalTrafficPolicy: Cluster
   ports:
   - name: http
+    nodePort: 32389
     port: 80
     protocol: TCP
     targetPort: 8000
   selector:
     app: basket-stage
-    heritage: deis
     type: web
   sessionAffinity: None
-  type: ClusterIP
+  type: NodePort
 status:
   loadBalancer: {}
