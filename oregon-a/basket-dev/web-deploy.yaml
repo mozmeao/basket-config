@@ -1,0 +1,452 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "106"
+    kubernetes.io/change-cause: jenkins deployed mozmeao/basket:66ada14e56253268ec5198402eddf4752c27fd51
+  creationTimestamp: "2018-03-07T17:24:37Z"
+  generation: 136
+  labels:
+    app: basket-dev
+    heritage: deis
+    type: web
+  name: basket-dev-web
+  namespace: basket-dev
+  resourceVersion: "106668638"
+  selfLink: /apis/extensions/v1beta1/namespaces/basket-dev/deployments/basket-dev-web
+  uid: 696c6258-222c-11e8-8262-02e6188a289c
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: basket-dev
+      heritage: deis
+      type: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: basket-dev
+        heritage: deis
+        type: web
+        version: v107
+      name: basket-dev-web
+      namespace: basket-dev
+    spec:
+      containers:
+      - args:
+        - bin/run-prod.sh
+        command:
+        - /bin/bash
+        - -c
+        env:
+        - name: BUILDPACK_URL
+          valueFrom:
+            secretKeyRef:
+              key: buildpack-url
+              name: basket-dev-v107-env
+        - name: CELERY_ALWAYS_EAGER
+          valueFrom:
+            secretKeyRef:
+              key: celery-always-eager
+              name: basket-dev-v107-env
+        - name: CELERY_NUM_WORKERS
+          valueFrom:
+            secretKeyRef:
+              key: celery-num-workers
+              name: basket-dev-v107-env
+        - name: CELERY_POOL
+          valueFrom:
+            secretKeyRef:
+              key: celery-pool
+              name: basket-dev-v107-env
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: basket-dev-v107-env
+        - name: DEBUG
+          valueFrom:
+            secretKeyRef:
+              key: debug
+              name: basket-dev-v107-env
+        - name: DEIS_APP
+          valueFrom:
+            secretKeyRef:
+              key: deis-app
+              name: basket-dev-v107-env
+        - name: DEIS_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              key: deis-domain
+              name: basket-dev-v107-env
+        - name: DONATE_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: donate-access-key-id
+              name: basket-dev-v107-env
+        - name: DONATE_CONTACT_RECORD_TYPE
+          valueFrom:
+            secretKeyRef:
+              key: donate-contact-record-type
+              name: basket-dev-v107-env
+        - name: DONATE_NOTIFY_EMAIL
+          valueFrom:
+            secretKeyRef:
+              key: donate-notify-email
+              name: basket-dev-v107-env
+        - name: DONATE_OPP_RECORD_TYPE
+          valueFrom:
+            secretKeyRef:
+              key: donate-opp-record-type
+              name: basket-dev-v107-env
+        - name: DONATE_QUEUE_IGNORE_MODE
+          valueFrom:
+            secretKeyRef:
+              key: donate-queue-ignore-mode
+              name: basket-dev-v107-env
+        - name: DONATE_QUEUE_REGION
+          valueFrom:
+            secretKeyRef:
+              key: donate-queue-region
+              name: basket-dev-v107-env
+        - name: DONATE_QUEUE_URL
+          valueFrom:
+            secretKeyRef:
+              key: donate-queue-url
+              name: basket-dev-v107-env
+        - name: DONATE_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: donate-secret-access-key
+              name: basket-dev-v107-env
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: basket-dev-v107-env
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: basket-dev-v107-env
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: basket-dev-v107-env
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: basket-dev-v107-env
+        - name: EMAIL_USE_TLS
+          valueFrom:
+            secretKeyRef:
+              key: email-use-tls
+              name: basket-dev-v107-env
+        - name: ET_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: et-client-id
+              name: basket-dev-v107-env
+        - name: ET_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: et-client-secret
+              name: basket-dev-v107-env
+        - name: EXACTTARGET_CONFIRMATION
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-confirmation
+              name: basket-dev-v107-env
+        - name: EXACTTARGET_DATA
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-data
+              name: basket-dev-v107-env
+        - name: EXACTTARGET_INTERESTS
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-interests
+              name: basket-dev-v107-env
+        - name: EXACTTARGET_OPTIN_STAGE
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-optin-stage
+              name: basket-dev-v107-env
+        - name: EXACTTARGET_PASS
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-pass
+              name: basket-dev-v107-env
+        - name: EXACTTARGET_USER
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-user
+              name: basket-dev-v107-env
+        - name: EXACTTARGET_USE_SANDBOX
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-use-sandbox
+              name: basket-dev-v107-env
+        - name: EXTRA_SUPPORTED_LANGS
+          valueFrom:
+            secretKeyRef:
+              key: extra-supported-langs
+              name: basket-dev-v107-env
+        - name: FXA_EVENTS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-access-key-id
+              name: basket-dev-v107-env
+        - name: FXA_EVENTS_QUEUE_ENABLE
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-queue-enable
+              name: basket-dev-v107-env
+        - name: FXA_EVENTS_QUEUE_REGION
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-queue-region
+              name: basket-dev-v107-env
+        - name: FXA_EVENTS_QUEUE_URL
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-queue-url
+              name: basket-dev-v107-env
+        - name: FXA_EVENTS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-secret-access-key
+              name: basket-dev-v107-env
+        - name: HTTPS
+          valueFrom:
+            secretKeyRef:
+              key: https
+              name: basket-dev-v107-env
+        - name: NEWRELIC_INI_FILE
+          valueFrom:
+            secretKeyRef:
+              key: newrelic-ini-file
+              name: basket-dev-v107-env
+        - name: NEW_RELIC_APP_NAME
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-app-name
+              name: basket-dev-v107-env
+        - name: NEW_RELIC_CONFIG_FILE
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-config-file
+              name: basket-dev-v107-env
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: basket-dev-v107-env
+        - name: OIDC_ENABLE
+          valueFrom:
+            secretKeyRef:
+              key: oidc-enable
+              name: basket-dev-v107-env
+        - name: OIDC_OP_AUTHORIZATION_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: oidc-op-authorization-endpoint
+              name: basket-dev-v107-env
+        - name: OIDC_OP_TOKEN_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: oidc-op-token-endpoint
+              name: basket-dev-v107-env
+        - name: OIDC_OP_USER_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: oidc-op-user-endpoint
+              name: basket-dev-v107-env
+        - name: OIDC_RP_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: oidc-rp-client-id
+              name: basket-dev-v107-env
+        - name: OIDC_RP_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: oidc-rp-client-secret
+              name: basket-dev-v107-env
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: basket-dev-v107-env
+        - name: REDIS_CACHE_DB
+          valueFrom:
+            secretKeyRef:
+              key: redis-cache-db
+              name: basket-dev-v107-env
+        - name: REDIS_CELERY_DB
+          valueFrom:
+            secretKeyRef:
+              key: redis-celery-db
+              name: basket-dev-v107-env
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              key: redis-url
+              name: basket-dev-v107-env
+        - name: SAML_CREATE_USER
+          valueFrom:
+            secretKeyRef:
+              key: saml-create-user
+              name: basket-dev-v107-env
+        - name: SAML_ENABLE
+          valueFrom:
+            secretKeyRef:
+              key: saml-enable
+              name: basket-dev-v107-env
+        - name: SAML_ENTITY_ID
+          valueFrom:
+            secretKeyRef:
+              key: saml-entity-id
+              name: basket-dev-v107-env
+        - name: SAML_REMOTE_METADATA
+          valueFrom:
+            secretKeyRef:
+              key: saml-remote-metadata
+              name: basket-dev-v107-env
+        - name: SAML_SSO_URL
+          valueFrom:
+            secretKeyRef:
+              key: saml-sso-url
+              name: basket-dev-v107-env
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: basket-dev-v107-env
+        - name: SECURE_SSL_REDIRECT
+          valueFrom:
+            secretKeyRef:
+              key: secure-ssl-redirect
+              name: basket-dev-v107-env
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: basket-dev-v107-env
+        - name: SFDC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-password
+              name: basket-dev-v107-env
+        - name: SFDC_SEC_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-sec-token
+              name: basket-dev-v107-env
+        - name: SFDC_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-username
+              name: basket-dev-v107-env
+        - name: STATSD_CLIENT
+          valueFrom:
+            secretKeyRef:
+              key: statsd-client
+              name: basket-dev-v107-env
+        - name: STATSD_HOST
+          valueFrom:
+            secretKeyRef:
+              key: statsd-host
+              name: basket-dev-v107-env
+        - name: STATSD_PREFIX
+          valueFrom:
+            secretKeyRef:
+              key: statsd-prefix
+              name: basket-dev-v107-env
+        - name: SUBHUB_OPP_RECORD_TYPE
+          valueFrom:
+            secretKeyRef:
+              key: subhub-opp-record-type
+              name: basket-dev-v107-env
+        - name: SUPERTOKEN
+          valueFrom:
+            secretKeyRef:
+              key: supertoken
+              name: basket-dev-v107-env
+        - name: SYNC_KEY
+          valueFrom:
+            secretKeyRef:
+              key: sync-key
+              name: basket-dev-v107-env
+        - name: TASK_LOCKING_ENABLE
+          valueFrom:
+            secretKeyRef:
+              key: task-locking-enable
+              name: basket-dev-v107-env
+        - name: WORKFLOW_RELEASE
+          valueFrom:
+            secretKeyRef:
+              key: workflow-release
+              name: basket-dev-v107-env
+        - name: WORKFLOW_RELEASE_CREATED_AT
+          valueFrom:
+            secretKeyRef:
+              key: workflow-release-created-at
+              name: basket-dev-v107-env
+        - name: WORKFLOW_RELEASE_SUMMARY
+          valueFrom:
+            secretKeyRef:
+              key: workflow-release-summary
+              name: basket-dev-v107-env
+        image: 127.0.0.1:5555/basket-dev:v107
+        imagePullPolicy: IfNotPresent
+        name: basket-dev-web
+        readinessProbe:
+          failureThreshold: 1
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8000
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 300Mi
+          requests:
+            cpu: 250m
+            memory: 120Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2019-02-12T21:55:29Z"
+    lastUpdateTime: "2019-07-10T16:41:35Z"
+    message: ReplicaSet "basket-dev-web-5f4b97c545" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2019-07-10T20:23:57Z"
+    lastUpdateTime: "2019-07-10T20:23:57Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  observedGeneration: 136
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
