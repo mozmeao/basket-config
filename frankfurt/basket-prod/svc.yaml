@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    router.deis.io/domains: basket-prod,basket.mozilla.org,basket.mozilla.com
+    router.deis.io/maintenance: "False"
+    router.deis.io/ssl.enforce: "False"
+  creationTimestamp: "2017-07-14T15:16:42Z"
+  labels:
+    app: basket-prod
+    heritage: deis
+    router.deis.io/routable: "true"
+  name: basket-prod
+  namespace: basket-prod
+  resourceVersion: "63353049"
+  selfLink: /api/v1/namespaces/basket-prod/services/basket-prod
+  uid: 7107cfec-68a7-11e7-8dc9-02859405480d
+spec:
+  clusterIP: 100.66.203.83
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: basket-prod
+    heritage: deis
+    type: web
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

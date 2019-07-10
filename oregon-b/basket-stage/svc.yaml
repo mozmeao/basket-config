@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    router.deis.io/domains: basket-stage
+    router.deis.io/maintenance: "False"
+    router.deis.io/ssl.enforce: "False"
+  creationTimestamp: "2018-01-24T22:09:32Z"
+  labels:
+    app: basket-stage
+    heritage: deis
+    router.deis.io/routable: "true"
+  name: basket-stage
+  namespace: basket-stage
+  resourceVersion: "1121087"
+  selfLink: /api/v1/namespaces/basket-stage/services/basket-stage
+  uid: 4176476e-0153-11e8-8c8b-0656fabf84c0
+spec:
+  clusterIP: 100.67.220.181
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: basket-stage
+    heritage: deis
+    type: web
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
