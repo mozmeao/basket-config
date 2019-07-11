@@ -134,6 +134,14 @@ spec:
               name: basket-stage-secrets
         - name: FXA_OAUTH_SERVER_ENV
           value: stage
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: MAINTENANCE_MODE
           value: "False"
         - name: MAINTENANCE_READ_ONLY
@@ -210,7 +218,7 @@ spec:
           value: "True"
         - name: WSGI_NUM_WORKERS
           value: 4
-        image: mozmeao/basket:66ada14
+        image: mozmeao/basket:4d0668d
         imagePullPolicy: IfNotPresent
         name: basket-stage-fxaeventsworker
         resources: {}
