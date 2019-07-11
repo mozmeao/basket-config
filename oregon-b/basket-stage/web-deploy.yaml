@@ -1,20 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "108"
-    kubernetes.io/change-cause: jenkins deployed mozmeao/basket:66ada14e56253268ec5198402eddf4752c27fd51
-  creationTimestamp: "2018-01-24T22:09:56Z"
+  creationTimestamp: null
   generation: 165
   labels:
     app: basket-stage
-    heritage: deis
     type: web
   name: basket-stage-web
   namespace: basket-stage
-  resourceVersion: "131469176"
-  selfLink: /apis/extensions/v1beta1/namespaces/basket-stage/deployments/basket-stage-web
-  uid: 4f799605-0153-11e8-8c8b-0656fabf84c0
 spec:
   progressDeadlineSeconds: 600
   replicas: 3
@@ -22,7 +15,6 @@ spec:
   selector:
     matchLabels:
       app: basket-stage
-      heritage: deis
       type: web
   strategy:
     rollingUpdate:
@@ -34,9 +26,7 @@ spec:
       creationTimestamp: null
       labels:
         app: basket-stage
-        heritage: deis
         type: web
-        version: v110
       name: basket-stage-web
       namespace: basket-stage
     spec:
@@ -48,291 +38,180 @@ spec:
         - -c
         env:
         - name: ADMIN_REDIRECT_URL
-          valueFrom:
-            secretKeyRef:
-              key: admin-redirect-url
-              name: basket-stage-v110-env
+          value: https://admin-stage.basket.moz.works/admin/
         - name: ALLOWED_HOSTS
-          valueFrom:
-            secretKeyRef:
-              key: allowed-hosts
-              name: basket-stage-v110-env
+          value: "*"
         - name: CELERY_ALWAYS_EAGER
-          valueFrom:
-            secretKeyRef:
-              key: celery-always-eager
-              name: basket-stage-v110-env
+          value: "False"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               key: database-url
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: DEBUG
-          valueFrom:
-            secretKeyRef:
-              key: debug
-              name: basket-stage-v110-env
-        - name: DEIS_APP
-          valueFrom:
-            secretKeyRef:
-              key: deis-app
-              name: basket-stage-v110-env
-        - name: DEIS_DOMAIN
-          valueFrom:
-            secretKeyRef:
-              key: deis-domain
-              name: basket-stage-v110-env
+          value: "False"
         - name: DISABLE_ADMIN
-          valueFrom:
-            secretKeyRef:
-              key: disable-admin
-              name: basket-stage-v110-env
+          value: "True"
         - name: DONATE_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: donate-access-key-id
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: DONATE_CONTACT_RECORD_TYPE
-          valueFrom:
-            secretKeyRef:
-              key: donate-contact-record-type
-              name: basket-stage-v110-env
+          value: 0120B0000005iGB
         - name: DONATE_OPP_RECORD_TYPE
-          valueFrom:
-            secretKeyRef:
-              key: donate-opp-record-type
-              name: basket-stage-v110-env
+          value: 0120B000000t6NV
         - name: DONATE_QUEUE_REGION
-          valueFrom:
-            secretKeyRef:
-              key: donate-queue-region
-              name: basket-stage-v110-env
+          value: us-east-1
         - name: DONATE_QUEUE_URL
           valueFrom:
             secretKeyRef:
               key: donate-queue-url
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: DONATE_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: donate-secret-access-key
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
               key: email-host
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: EMAIL_HOST_PASSWORD
           valueFrom:
             secretKeyRef:
               key: email-host-password
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: EMAIL_HOST_USER
           valueFrom:
             secretKeyRef:
               key: email-host-user
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: EMAIL_PORT
-          valueFrom:
-            secretKeyRef:
-              key: email-port
-              name: basket-stage-v110-env
+          value: 587
         - name: EMAIL_USE_TLS
-          valueFrom:
-            secretKeyRef:
-              key: email-use-tls
-              name: basket-stage-v110-env
+          value: "True"
         - name: ET_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: et-client-id
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: ET_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: et-client-secret
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: EXTRA_SUPPORTED_LANGS
-          valueFrom:
-            secretKeyRef:
-              key: extra-supported-langs
-              name: basket-stage-v110-env
+          value: zh-tw
         - name: FXA_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: fxa-client-id
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: FXA_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: fxa-client-secret
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: FXA_EVENTS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: fxa-events-access-key-id
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: FXA_EVENTS_QUEUE_ENABLE
-          valueFrom:
-            secretKeyRef:
-              key: fxa-events-queue-enable
-              name: basket-stage-v110-env
+          value: "True"
         - name: FXA_EVENTS_QUEUE_REGION
-          valueFrom:
-            secretKeyRef:
-              key: fxa-events-queue-region
-              name: basket-stage-v110-env
+          value: us-east-1
         - name: FXA_EVENTS_QUEUE_URL
           valueFrom:
             secretKeyRef:
               key: fxa-events-queue-url
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: FXA_EVENTS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: fxa-events-secret-access-key
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: FXA_OAUTH_SERVER_ENV
-          valueFrom:
-            secretKeyRef:
-              key: fxa-oauth-server-env
-              name: basket-stage-v110-env
+          value: stage
         - name: MAINTENANCE_MODE
-          valueFrom:
-            secretKeyRef:
-              key: maintenance-mode
-              name: basket-stage-v110-env
+          value: "False"
         - name: MAINTENANCE_READ_ONLY
-          valueFrom:
-            secretKeyRef:
-              key: maintenance-read-only
-              name: basket-stage-v110-env
+          value: "True"
         - name: NEWRELIC_INI_FILE
-          valueFrom:
-            secretKeyRef:
-              key: newrelic-ini-file
-              name: basket-stage-v110-env
+          value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          valueFrom:
-            secretKeyRef:
-              key: new-relic-app-name
-              name: basket-stage-v110-env
+          value: basket-stage-oregon-b
         - name: NEW_RELIC_CONFIG_FILE
-          valueFrom:
-            secretKeyRef:
-              key: new-relic-config-file
-              name: basket-stage-v110-env
+          value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
-              name: basket-stage-v110-env
-        - name: PORT
-          valueFrom:
-            secretKeyRef:
-              key: port
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: REDIS_CACHE_DB
-          valueFrom:
-            secretKeyRef:
-              key: redis-cache-db
-              name: basket-stage-v110-env
+          value: 3
         - name: REDIS_CELERY_DB
-          valueFrom:
-            secretKeyRef:
-              key: redis-celery-db
-              name: basket-stage-v110-env
+          value: 2
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
               key: redis-url
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: secret-key
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: SECURE_SSL_REDIRECT
-          valueFrom:
-            secretKeyRef:
-              key: secure-ssl-redirect
-              name: basket-stage-v110-env
+          value: "True"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
               key: sentry-dsn
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: SFDC_PASSWORD
           valueFrom:
             secretKeyRef:
               key: sfdc-password
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: SFDC_SEC_TOKEN
           valueFrom:
             secretKeyRef:
               key: sfdc-sec-token
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: SFDC_USERNAME
           valueFrom:
             secretKeyRef:
               key: sfdc-username
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: SNITCH_ID
           valueFrom:
             secretKeyRef:
               key: snitch-id
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: STATSD_CLIENT
-          valueFrom:
-            secretKeyRef:
-              key: statsd-client
-              name: basket-stage-v110-env
+          value: django_statsd.clients.normal
         - name: STATSD_HOST
-          valueFrom:
-            secretKeyRef:
-              key: statsd-host
-              name: basket-stage-v110-env
+          value: datadog-statsd.datadog.svc.cluster.local
         - name: STATSD_PREFIX
-          valueFrom:
-            secretKeyRef:
-              key: statsd-prefix
-              name: basket-stage-v110-env
+          value: basket-stage-oregon-b
         - name: SUPERTOKEN
           valueFrom:
             secretKeyRef:
               key: supertoken
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:
               key: sync-key
-              name: basket-stage-v110-env
+              name: basket-stage-secrets
         - name: TASK_LOCKING_ENABLE
-          valueFrom:
-            secretKeyRef:
-              key: task-locking-enable
-              name: basket-stage-v110-env
-        - name: WORKFLOW_RELEASE
-          valueFrom:
-            secretKeyRef:
-              key: workflow-release
-              name: basket-stage-v110-env
-        - name: WORKFLOW_RELEASE_CREATED_AT
-          valueFrom:
-            secretKeyRef:
-              key: workflow-release-created-at
-              name: basket-stage-v110-env
-        - name: WORKFLOW_RELEASE_SUMMARY
-          valueFrom:
-            secretKeyRef:
-              key: workflow-release-summary
-              name: basket-stage-v110-env
+          value: "True"
         - name: WSGI_NUM_WORKERS
-          valueFrom:
-            secretKeyRef:
-              key: wsgi-num-workers
-              name: basket-stage-v110-env
-        image: 127.0.0.1:5555/basket-stage:v110
+          value: 4
+        image: mozmeao/basket:66ada14
         imagePullPolicy: IfNotPresent
         name: basket-stage-web
         readinessProbe:
@@ -357,22 +236,3 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 3
-  conditions:
-  - lastTransitionTime: "2019-06-08T20:50:58Z"
-    lastUpdateTime: "2019-06-08T20:50:58Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2019-04-08T18:41:00Z"
-    lastUpdateTime: "2019-07-10T16:44:21Z"
-    message: ReplicaSet "basket-stage-web-c7fdd9986" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 165
-  readyReplicas: 3
-  replicas: 3
-  updatedReplicas: 3

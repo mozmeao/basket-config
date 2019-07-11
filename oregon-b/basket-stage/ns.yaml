@@ -1,13 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  creationTimestamp: "2018-01-24T22:09:32Z"
-  labels:
-    heritage: deis
   name: basket-stage
-  resourceVersion: "1120960"
-  selfLink: /api/v1/namespaces/basket-stage
-  uid: 41727e2f-0153-11e8-8c8b-0656fabf84c0
 spec:
   finalizers:
   - kubernetes
