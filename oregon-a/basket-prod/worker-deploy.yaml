@@ -1,20 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "33"
-    kubernetes.io/change-cause: jenkins deployed mozmeao/basket:66ada14e56253268ec5198402eddf4752c27fd51
-  creationTimestamp: "2018-03-07T20:11:56Z"
-  generation: 35
+  creationTimestamp: null
   labels:
     app: basket-prod
-    heritage: deis
     type: worker
   name: basket-prod-worker
   namespace: basket-prod
-  resourceVersion: "106639631"
-  selfLink: /apis/extensions/v1beta1/namespaces/basket-prod/deployments/basket-prod-worker
-  uid: c937b23e-2243-11e8-8262-02e6188a289c
 spec:
   progressDeadlineSeconds: 600
   replicas: 4
@@ -22,7 +14,6 @@ spec:
   selector:
     matchLabels:
       app: basket-prod
-      heritage: deis
       type: worker
   strategy:
     rollingUpdate:
@@ -34,9 +25,7 @@ spec:
       creationTimestamp: null
       labels:
         app: basket-prod
-        heritage: deis
         type: worker
-        version: v38
       name: basket-prod-worker
       namespace: basket-prod
     spec:
@@ -48,376 +37,253 @@ spec:
         - -c
         env:
         - name: ADMIN_REDIRECT_URL
-          valueFrom:
-            secretKeyRef:
-              key: admin-redirect-url
-              name: basket-prod-v38-env
+          value: https://admin.basket.moz.works/admin/
+        - name: ALLOWED_HOSTS
+          value: "*"
         - name: CELERY_ALWAYS_EAGER
-          valueFrom:
-            secretKeyRef:
-              key: celery-always-eager
-              name: basket-prod-v38-env
+          value: "False"
         - name: CELERY_NUM_WORKERS
-          valueFrom:
-            secretKeyRef:
-              key: celery-num-workers
-              name: basket-prod-v38-env
+          value: 5
         - name: CELERY_REDIS_MAX_CONNECTIONS
-          valueFrom:
-            secretKeyRef:
-              key: celery-redis-max-connections
-              name: basket-prod-v38-env
+          value: 5
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               key: database-url
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: DEBUG
-          valueFrom:
-            secretKeyRef:
-              key: debug
-              name: basket-prod-v38-env
-        - name: DEIS_APP
-          valueFrom:
-            secretKeyRef:
-              key: deis-app
-              name: basket-prod-v38-env
-        - name: DEIS_DOMAIN
-          valueFrom:
-            secretKeyRef:
-              key: deis-domain
-              name: basket-prod-v38-env
+          value: "False"
         - name: DISABLE_ADMIN
-          valueFrom:
-            secretKeyRef:
-              key: disable-admin
-              name: basket-prod-v38-env
+          value: "True"
         - name: DONATE_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: donate-access-key-id
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: DONATE_CONTACT_RECORD_TYPE
-          valueFrom:
-            secretKeyRef:
-              key: donate-contact-record-type
-              name: basket-prod-v38-env
+          value: 0120B0000005iGB
         - name: DONATE_NOTIFY_EMAIL
           valueFrom:
             secretKeyRef:
               key: donate-notify-email
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: DONATE_OPP_RECORD_TYPE
-          valueFrom:
-            secretKeyRef:
-              key: donate-opp-record-type
-              name: basket-prod-v38-env
+          value: 0120B000000t6NV
         - name: DONATE_QUEUE_REGION
-          valueFrom:
-            secretKeyRef:
-              key: donate-queue-region
-              name: basket-prod-v38-env
+          value: us-east-1
         - name: DONATE_QUEUE_URL
           valueFrom:
             secretKeyRef:
               key: donate-queue-url
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: DONATE_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: donate-secret-access-key
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: DONATE_SNITCH_ID
           valueFrom:
             secretKeyRef:
               key: donate-snitch-id
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
               key: email-host
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: EMAIL_HOST_PASSWORD
           valueFrom:
             secretKeyRef:
               key: email-host-password
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: EMAIL_HOST_USER
           valueFrom:
             secretKeyRef:
               key: email-host-user
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: EMAIL_PORT
-          valueFrom:
-            secretKeyRef:
-              key: email-port
-              name: basket-prod-v38-env
+          value: 587
         - name: EMAIL_USE_TLS
-          valueFrom:
-            secretKeyRef:
-              key: email-use-tls
-              name: basket-prod-v38-env
+          value: "True"
         - name: ET_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: et-client-id
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: ET_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: et-client-secret
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: EXACTTARGET_CONFIRMATION
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-confirmation
-              name: basket-prod-v38-env
+          value: Confirmation
         - name: EXACTTARGET_DATA
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-data
-              name: basket-prod-v38-env
+          value: Master_Subscribers
         - name: EXACTTARGET_INTERESTS
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-interests
-              name: basket-prod-v38-env
+          value: GET_INVOLVED
         - name: EXACTTARGET_OPTIN_STAGE
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-optin-stage
-              name: basket-prod-v38-env
+          value: Double_Opt_In
         - name: EXACTTARGET_PASS
           valueFrom:
             secretKeyRef:
               key: exacttarget-pass
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: EXACTTARGET_USER
           valueFrom:
             secretKeyRef:
               key: exacttarget-user
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: EXACTTARGET_USE_SANDBOX
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-use-sandbox
-              name: basket-prod-v38-env
+          value: "False"
         - name: EXTRA_SUPPORTED_LANGS
-          valueFrom:
-            secretKeyRef:
-              key: extra-supported-langs
-              name: basket-prod-v38-env
+          value: zh-tw
         - name: FXA_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: fxa-access-key-id
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: FXA_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: fxa-client-id
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: FXA_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: fxa-client-secret
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: FXA_EVENTS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: fxa-events-access-key-id
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: FXA_EVENTS_QUEUE_ENABLE
-          valueFrom:
-            secretKeyRef:
-              key: fxa-events-queue-enable
-              name: basket-prod-v38-env
+          value: "True"
         - name: FXA_EVENTS_QUEUE_REGION
-          valueFrom:
-            secretKeyRef:
-              key: fxa-events-queue-region
-              name: basket-prod-v38-env
+          value: us-west-2
         - name: FXA_EVENTS_QUEUE_URL
           valueFrom:
             secretKeyRef:
               key: fxa-events-queue-url
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: FXA_EVENTS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: fxa-events-secret-access-key
-              name: basket-prod-v38-env
-        - name: FXA_OAUTH_SERVER_ENV
+              name: basket-prod-secrets
+        - name: FXA_LOGIN_CUTOVER_TIMESTAMP
           valueFrom:
             secretKeyRef:
-              key: fxa-oauth-server-env
-              name: basket-prod-v38-env
+              key: fxa-login-cutover-timestamp
+              name: basket-prod-secrets
+        - name: FXA_OAUTH_SERVER_ENV
+          value: production
         - name: FXA_S3_BUCKET
           valueFrom:
             secretKeyRef:
               key: fxa-s3-bucket
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: FXA_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: fxa-secret-access-key
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: FXA_SNITCH_URL
           valueFrom:
             secretKeyRef:
               key: fxa-snitch-url
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: HTTPS
+          value: "on"
+        - name: K8S_NAMESPACE
           valueFrom:
-            secretKeyRef:
-              key: https
-              name: basket-prod-v38-env
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: MAINTENANCE_MODE
-          valueFrom:
-            secretKeyRef:
-              key: maintenance-mode
-              name: basket-prod-v38-env
+          value: "False"
         - name: MAINTENANCE_READ_ONLY
-          valueFrom:
-            secretKeyRef:
-              key: maintenance-read-only
-              name: basket-prod-v38-env
+          value: "False"
         - name: NEWRELIC_INI_FILE
-          valueFrom:
-            secretKeyRef:
-              key: newrelic-ini-file
-              name: basket-prod-v38-env
+          value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          valueFrom:
-            secretKeyRef:
-              key: new-relic-app-name
-              name: basket-prod-v38-env
+          value: basket-prod-oregon-b
         - name: NEW_RELIC_CONFIG_FILE
-          valueFrom:
-            secretKeyRef:
-              key: new-relic-config-file
-              name: basket-prod-v38-env
+          value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
-              name: basket-prod-v38-env
-        - name: PORT
-          valueFrom:
-            secretKeyRef:
-              key: port
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: REDIS_CACHE_DB
-          valueFrom:
-            secretKeyRef:
-              key: redis-cache-db
-              name: basket-prod-v38-env
+          value: 5
         - name: REDIS_CELERY_DB
-          valueFrom:
-            secretKeyRef:
-              key: redis-celery-db
-              name: basket-prod-v38-env
+          value: 4
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
               key: redis-url
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: secret-key
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: SECURE_SSL_REDIRECT
-          valueFrom:
-            secretKeyRef:
-              key: secure-ssl-redirect
-              name: basket-prod-v38-env
+          value: "True"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
               key: sentry-dsn
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: SFDC_PASSWORD
           valueFrom:
             secretKeyRef:
               key: sfdc-password
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: SFDC_SEC_TOKEN
           valueFrom:
             secretKeyRef:
               key: sfdc-sec-token
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: SFDC_USERNAME
           valueFrom:
             secretKeyRef:
               key: sfdc-username
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: SNITCH_ID
           valueFrom:
             secretKeyRef:
               key: snitch-id
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: STATSD_CLIENT
-          valueFrom:
-            secretKeyRef:
-              key: statsd-client
-              name: basket-prod-v38-env
+          value: django_statsd.clients.normal
         - name: STATSD_HOST
-          valueFrom:
-            secretKeyRef:
-              key: statsd-host
-              name: basket-prod-v38-env
+          value: datadog-statsd.datadog.svc.cluster.local
         - name: STATSD_PREFIX
-          valueFrom:
-            secretKeyRef:
-              key: statsd-prefix
-              name: basket-prod-v38-env
+          value: basket-prod-oregon-b
         - name: SUPERTOKEN
           valueFrom:
             secretKeyRef:
               key: supertoken
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:
               key: sync-key
-              name: basket-prod-v38-env
+              name: basket-prod-secrets
         - name: TASK_LOCKING_ENABLE
-          valueFrom:
-            secretKeyRef:
-              key: task-locking-enable
-              name: basket-prod-v38-env
+          value: "True"
         - name: TASK_LOCK_TIMEOUT
-          valueFrom:
-            secretKeyRef:
-              key: task-lock-timeout
-              name: basket-prod-v38-env
-        - name: WORKFLOW_RELEASE
-          valueFrom:
-            secretKeyRef:
-              key: workflow-release
-              name: basket-prod-v38-env
-        - name: WORKFLOW_RELEASE_CREATED_AT
-          valueFrom:
-            secretKeyRef:
-              key: workflow-release-created-at
-              name: basket-prod-v38-env
-        - name: WORKFLOW_RELEASE_SUMMARY
-          valueFrom:
-            secretKeyRef:
-              key: workflow-release-summary
-              name: basket-prod-v38-env
+          value: 10
         - name: WSGI_NUM_WORKERS
-          valueFrom:
-            secretKeyRef:
-              key: wsgi-num-workers
-              name: basket-prod-v38-env
+          value: 4
         - name: conflicts
-          valueFrom:
-            secretKeyRef:
-              key: conflicts
-              name: basket-prod-v38-env
-        image: 127.0.0.1:5555/basket-prod:v38
+          value: 1
+        image: mozmeao/basket:4d0668d
         imagePullPolicy: IfNotPresent
         name: basket-prod-worker
         resources:
@@ -434,22 +300,3 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 4
-  conditions:
-  - lastTransitionTime: "2019-06-12T00:45:27Z"
-    lastUpdateTime: "2019-06-12T00:45:27Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2019-02-12T21:55:28Z"
-    lastUpdateTime: "2019-07-10T16:49:11Z"
-    message: ReplicaSet "basket-prod-worker-657d7dffc9" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 35
-  readyReplicas: 4
-  replicas: 4
-  updatedReplicas: 4
