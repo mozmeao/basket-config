@@ -1,13 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  creationTimestamp: "2018-03-07T16:20:03Z"
-  labels:
-    heritage: deis
   name: basket-admin
-  resourceVersion: "3197766"
-  selfLink: /api/v1/namespaces/basket-admin
-  uid: 6411e0d1-2223-11e8-8262-02e6188a289c
 spec:
   finalizers:
   - kubernetes
