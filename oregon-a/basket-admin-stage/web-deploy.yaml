@@ -65,7 +65,7 @@ spec:
               key: email-host-user
               name: basket-admin-stage-secrets
         - name: EMAIL_PORT
-          value: 587
+          value: "587"
         - name: EMAIL_USE_TLS
           value: "True"
         - name: ET_CLIENT_ID
@@ -122,9 +122,9 @@ spec:
               key: oidc-rp-client-secret
               name: basket-admin-stage-secrets
         - name: REDIS_CACHE_DB
-          value: 3
+          value: "3"
         - name: REDIS_CELERY_DB
-          value: 2
+          value: "2"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
@@ -184,8 +184,8 @@ spec:
         - name: TASK_LOCKING_ENABLE
           value: "True"
         - name: WSGI_NUM_WORKERS
-          value: 4
-        image: mozmeao/basket:4d0668d
+          value: "4"
+        image: mozmeao/basket:4d0668d4e5cb304e68b04bcc0d2b278d27b591e6
         imagePullPolicy: IfNotPresent
         name: basket-admin-stage-web
         readinessProbe:
