@@ -85,16 +85,24 @@ spec:
           value: "stage"
         - name: HTTPS
           value: "on"
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: MAINTENANCE_MODE
           value: "False"
         - name: MAINTENANCE_READ_ONLY
           value: "True"
         - name: NEWRELIC_INI_FILE
-          value: "newrelic.ini"
+          value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: "basket-stage-frankfurt"
+          value: basket-stage-frankfurt;basket-stage
         - name: NEW_RELIC_CONFIG_FILE
-          value: "/app/newrelic.ini"
+          value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
@@ -103,9 +111,9 @@ spec:
         - name: READ_ONLY_MODE
           value: "True"
         - name: REDIS_CACHE_DB
-          value: 3
+          value: "3"
         - name: REDIS_CELERY_DB
-          value: 2
+          value: "2"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
@@ -159,7 +167,7 @@ spec:
               name: basket-stage-secrets
         - name: TASK_LOCKING_ENABLE
           value: "True"
-        image: mozmeao/basket:66ada14
+        image: mozmeao/basket:4d0668d4e5cb304e68b04bcc0d2b278d27b591e6
         imagePullPolicy: Always
         name: basket-stage-web
         readinessProbe:

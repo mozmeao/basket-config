@@ -65,10 +65,7 @@ spec:
               key: email-host-user
               name: basket-prod-secrets
         - name: EMAIL_PORT
-          valueFrom:
-            secretKeyRef:
-              key: email-port
-              name: basket-prod-secrets
+          value: "587"
         - name: EMAIL_USE_TLS
           value: "True"
         - name: ET_CLIENT_ID
@@ -117,6 +114,14 @@ spec:
           value: production
         - name: HTTPS
           value: "on"
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: MAINTENANCE_MODE
           value: "False"
         - name: MAINTENANCE_READ_ONLY
@@ -124,7 +129,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-frankfurt
+          value: basket-prod-frankfurt;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -135,9 +140,9 @@ spec:
         - name: READ_ONLY_MODE
           value: "True"
         - name: REDIS_CACHE_DB
-          value: 5
+          value: "5"
         - name: REDIS_CELERY_DB
-          value: 4
+          value: "4"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
@@ -192,12 +197,12 @@ spec:
         - name: TASK_LOCKING_ENABLE
           value: "True"
         - name: TASK_LOCK_TIMEOUT
-          value: 10
+          value: "10"
         - name: WSGI_NUM_WORKERS
-          value: 4
+          value: "4"
         - name: conflicts
-          value: 1
-        image: mozmeao/basket:66ada14
+          value: "1"
+        image: mozmeao/basket:4d0668d4e5cb304e68b04bcc0d2b278d27b591e6
         imagePullPolicy: Always
         name: basket-prod-web
         readinessProbe:
