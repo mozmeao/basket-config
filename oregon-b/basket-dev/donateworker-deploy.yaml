@@ -43,7 +43,7 @@ spec:
         - name: CELERY_ALWAYS_EAGER
           value: "False"
         - name: CELERY_NUM_WORKERS
-          value: 4
+          value: "4"
         - name: CELERY_POOL
           value: prefork
         - name: DATABASE_URL
@@ -167,7 +167,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-dev-oregon-b
+          value: basket-dev-oregon-b;basket-dev
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -194,9 +194,9 @@ spec:
               key: oidc-rp-client-secret
               name: basket-dev-secrets
         - name: REDIS_CACHE_DB
-          value: 1
+          value: "1"
         - name: REDIS_CELERY_DB
-          value: 0
+          value: "0"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
@@ -260,8 +260,8 @@ spec:
         - name: TASK_LOCKING_ENABLE
           value: "True"
         - name: WSGI_NUM_WORKERS
-          value: 4
-        image: mozmeao/basket:4d0668d
+          value: "4"
+        image: mozmeao/basket:4d0668d4d0668d4e5cb304e68b04bcc0d2b278d27b591e6
         imagePullPolicy: IfNotPresent
         name: basket-dev-donateworker
         resources: {}
