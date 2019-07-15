@@ -44,9 +44,9 @@ spec:
         - name: CELERY_ALWAYS_EAGER
           value: "False"
         - name: CELERY_NUM_WORKERS
-          value: 5
+          value: "5"
         - name: CELERY_REDIS_MAX_CONNECTIONS
-          value: 5
+          value: "5"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -103,7 +103,7 @@ spec:
               key: email-host-user
               name: basket-prod-secrets
         - name: EMAIL_PORT
-          value: 587
+          value: "587"
         - name: EMAIL_USE_TLS
           value: "True"
         - name: ET_CLIENT_ID
@@ -209,7 +209,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-oregon-b
+          value: basket-prod-oregon-b;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -223,9 +223,9 @@ spec:
               key: port
               name: basket-prod-secrets
         - name: REDIS_CACHE_DB
-          value: 5
+          value: "5"
         - name: REDIS_CELERY_DB
-          value: 4
+          value: "4"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
@@ -282,12 +282,12 @@ spec:
         - name: TASK_LOCKING_ENABLE
           value: "True"
         - name: TASK_LOCK_TIMEOUT
-          value: 10
+          value: "10"
         - name: WSGI_NUM_WORKERS
-          value: 4
+          value: "4"
         - name: conflicts
-          value: 1
-        image: mozmeao/basket:4d0668d
+          value: "1"
+        image: mozmeao/basket:4d0668d4e5cb304e68b04bcc0d2b278d27b591e6
         imagePullPolicy: IfNotPresent
         name: basket-prod-clock
         resources: {}
