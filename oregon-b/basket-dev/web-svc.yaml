@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: basket-dev
+  name: basket-nodeport
+  namespace: basket-dev
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    nodePort: 31107
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: basket-dev
+    type: web
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
