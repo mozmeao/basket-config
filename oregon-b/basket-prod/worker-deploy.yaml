@@ -36,7 +36,7 @@ spec:
         - /bin/bash
         - -c
         env:
-        - name: ADMIN_REDIRECT_URL        - name: ADMIN_REDIRECT_URL
+        - name: ADMIN_REDIRECT_URL
           value: https://admin.basket.moz.works/admin/
         - name: ALLOWED_HOSTS
           value: "*"
