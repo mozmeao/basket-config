@@ -36,6 +36,8 @@ spec:
         - /bin/bash
         - -c
         env:
+        - name: ALLOWED_HOSTS
+          value: "*"
         - name: BUILDPACK_URL
           value: https://github.com/pmclanahan/heroku-buildpack-python-peep
         - name: CELERY_ALWAYS_EAGER
