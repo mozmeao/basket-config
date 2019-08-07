@@ -44,6 +44,8 @@ spec:
           value: "4"
         - name: CELERY_POOL
           value: prefork
+        - name: CLUSTER_NAME
+          value: "oregon-a"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:

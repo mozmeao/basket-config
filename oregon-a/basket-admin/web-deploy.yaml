@@ -40,6 +40,8 @@ spec:
           value: "True"
         - name: ALLOWED_HOSTS
           value: "*"
+        - name: CLUSTER_NAME
+          value: "oregon-a"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
