@@ -46,6 +46,8 @@ spec:
           value: "5"
         - name: CELERY_REDIS_MAX_CONNECTIONS
           value: "5"
+        - name: CLUSTER_NAME
+          value: "oregon-b"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
