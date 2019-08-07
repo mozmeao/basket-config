@@ -1,15 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  creationTimestamp: "2018-01-24T22:03:44Z"
-  labels:
-    heritage: deis
   name: basket-prod
-  resourceVersion: "1120259"
-  selfLink: /api/v1/namespaces/basket-prod
-  uid: 71ae6221-0152-11e8-8c8b-0656fabf84c0
-spec:
-  finalizers:
-  - kubernetes
-status:
-  phase: Active
