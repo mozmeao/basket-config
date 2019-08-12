@@ -19,5 +19,3 @@ spec:
     type: web
   sessionAffinity: None
   type: NodePort
-status:
-  loadBalancer: {}
