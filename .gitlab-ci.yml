@@ -1,35 +1,38 @@
 stages:
   - deploy
+  - test
 
 .deploy:
   stage: deploy
-  retry:
-    max: 1  # Add one retry, especially for acceptance-tests
-    when: always
   tags:
     - aws
     - meao
   script:
     - kubectl_1.11 apply -f ${DEPLOYMENT}
     - ./rollout-status.sh ${DEPLOYMENT}
-    - ./acceptance-tests.sh ${URL}
 
 deploy oregon-a dev:
   extends: .deploy
   variables:
     DEPLOYMENT: oregon-a/basket-dev
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
-    URL: https://basket-dev.oregon-a.moz.works
-  only:
-    changes:
-      - "oregon-a/basket-dev/*"
+#  only:
+#    changes:
+#      - "oregon-a/basket-dev/*"
 
 deploy oregon-b dev:
   extends: .deploy
   variables:
     DEPLOYMENT: oregon-b/basket-dev
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
-    URL: https://basket-dev.oregon-b.moz.works
   only:
     changes:
       - "oregon-b/basket-dev/*"
+
+test dev:
+  stage: test
+  retry:
+    max: 1  # Add one retry, especially for acceptance-tests
+    when: always
+  script:
+    - ./acceptance-tests.sh http://basket-dev.moz.works/
