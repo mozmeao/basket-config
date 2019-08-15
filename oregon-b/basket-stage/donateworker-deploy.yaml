@@ -5,7 +5,7 @@ metadata:
   labels:
     app: basket-stage
     type: donateworker
-  name: basket-stage-donateworker-temp
+  name: basket-stage-donateworker
   namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
@@ -26,7 +26,7 @@ spec:
       labels:
         app: basket-stage
         type: donateworker
-      name: basket-stage-donateworker-temp
+      name: basket-stage-donateworker
       namespace: basket-stage
     spec:
       containers:
