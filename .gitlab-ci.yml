@@ -16,9 +16,9 @@ deploy oregon-a dev:
   variables:
     DEPLOYMENT: oregon-a/basket-dev
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
-#  only:
-#    changes:
-#      - "oregon-a/basket-dev/*"
+  only:
+    changes:
+      - "oregon-a/basket-dev/*"
 
 deploy oregon-b dev:
   extends: .deploy
@@ -34,5 +34,8 @@ test dev:
   retry:
     max: 1  # Add one retry, especially for acceptance-tests
     when: always
+  tags:
+    - aws
+    - meao
   script:
     - ./acceptance-tests.sh http://basket-dev.moz.works/
