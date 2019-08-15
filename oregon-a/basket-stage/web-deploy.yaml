@@ -5,11 +5,11 @@ metadata:
   labels:
     app: basket-stage
     type: web
-  name: basket-stage-web
+  name: basket-stage-web-temp
   namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -26,7 +26,7 @@ spec:
       labels:
         app: basket-stage
         type: web
-      name: basket-stage-web
+      name: basket-stage-web-temp
       namespace: basket-stage
     spec:
       containers:
