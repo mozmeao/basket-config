@@ -5,7 +5,7 @@ metadata:
   labels:
     app: basket-stage
     type: fxaeventsworker
-  name: basket-stage-fxaeventsworker-temp
+  name: basket-stage-fxaeventsworker
   namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
@@ -26,7 +26,7 @@ spec:
       labels:
         app: basket-stage
         type: fxaeventsworker
-      name: basket-stage-fxaeventsworker-temp
+      name: basket-stage-fxaeventsworker
       namespace: basket-stage
     spec:
       containers:

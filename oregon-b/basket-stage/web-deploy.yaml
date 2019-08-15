@@ -6,7 +6,7 @@ metadata:
   labels:
     app: basket-stage
     type: web
-  name: basket-stage-web-temp
+  name: basket-stage-web
   namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
@@ -27,7 +27,7 @@ spec:
       labels:
         app: basket-stage
         type: web
-      name: basket-stage-web-temp
+      name: basket-stage-web
       namespace: basket-stage
     spec:
       containers:
