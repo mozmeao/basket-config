@@ -5,11 +5,8 @@ metadata:
   labels:
     app: basket-stage
     type: worker
-  name: basket-stage-worker
+  name: basket-stage-worker-temp
   namespace: basket-stage
-  resourceVersion: "131469088"
-  selfLink: /apis/extensions/v1beta1/namespaces/basket-stage/deployments/basket-stage-worker
-  uid: 16ff1cc3-2244-11e8-8eeb-0656fabf84c0
 spec:
   progressDeadlineSeconds: 600
   replicas: 2
@@ -29,7 +26,7 @@ spec:
       labels:
         app: basket-stage
         type: worker
-      name: basket-stage-worker
+      name: basket-stage-worker-temp
       namespace: basket-stage
     spec:
       containers:

@@ -29,13 +29,50 @@ deploy oregon-b dev:
     changes:
       - "oregon-b/basket-dev/*"
 
-test dev:
+deploy oregon-a stage:
+  extends: .deploy
+  variables:
+    DEPLOYMENT: oregon-a/basket-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+  only:
+    changes:
+      - "oregon-a/basket-stage/*"
+
+deploy oregon-b stage:
+  extends: .deploy
+  variables:
+    DEPLOYMENT: oregon-b/basket-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
+  only:
+    changes:
+      - "oregon-b/basket-stage/*"
+
+deploy frankfurt stage:
+  extends: .deploy
+  variables:
+    DEPLOYMENT: frankfurt/basket-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+  only:
+    changes:
+      - "frankfurt/basket-stage/*"
+
+.test:
   stage: test
-  retry:
-    max: 1  # Add one retry, especially for acceptance-tests
-    when: always
   tags:
     - aws
     - meao
+  retry:
+    max: 1
+    when: always
   script:
-    - ./acceptance-tests.sh http://basket-dev.moz.works/
+    - ./acceptance-tests.sh ${URL}
+
+test dev:
+  extends: .test
+  variables:
+    URL: http://basket-dev.moz.works
+
+test stage:
+  extends: .test
+  variables:
+    URL: https://basket.allizom.org
