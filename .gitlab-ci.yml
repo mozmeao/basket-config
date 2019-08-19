@@ -93,6 +93,11 @@ test dev:
   variables:
     URL: http://basket-dev.moz.works
 
+test admin-stage:
+  extends: .test
+  variables:
+    URL: https://admin-stage.basket.moz.works
+
 test stage:
   extends: .test
   variables:
