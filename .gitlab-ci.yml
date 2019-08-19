@@ -1,4 +1,5 @@
 stages:
+  - deploy-admin
   - deploy
   - test
 
@@ -28,6 +29,26 @@ deploy oregon-b dev:
   only:
     changes:
       - "oregon-b/basket-dev/*"
+
+deploy oregon-a admin-stage:
+  extends: .deploy
+  stage: deploy-admin
+  variables:
+    DEPLOYMENT: oregon-a/basket-admin-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+  only:
+    changes:
+      - "oregon-a/basket-admin-stage/*"
+
+deploy oregon-b admin-stage:
+  extends: .deploy
+  stage: deploy-admin
+  variables:
+    DEPLOYMENT: oregon-b/basket-admin-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
+  only:
+    changes:
+      - "oregon-b/basket-admin-stage/*"
 
 deploy oregon-a stage:
   extends: .deploy
