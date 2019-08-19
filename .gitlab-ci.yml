@@ -115,6 +115,15 @@ deploy oregon-b prod:
     changes:
       - "oregon-b/basket-prod/*"
 
+deploy frankfurt prod:
+  extends: .deploy
+  variables:
+    DEPLOYMENT: frankfurt/basket-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+  only:
+    changes:
+      - "frankfurt/basket-prod/*"
+
 .test:
   stage: test
   tags:
