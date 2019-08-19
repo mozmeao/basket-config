@@ -106,6 +106,15 @@ deploy oregon-a prod:
     changes:
       - "oregon-a/basket-prod/*"
 
+deploy oregon-b prod:
+  extends: .deploy
+  variables:
+    DEPLOYMENT: oregon-b/basket-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
+  only:
+    changes:
+      - "oregon-b/basket-prod/*"
+
 .test:
   stage: test
   tags:
