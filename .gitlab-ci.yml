@@ -159,3 +159,8 @@ test prod:
   extends: .test
   variables:
     URL: https://basket.mozilla.org
+
+test frankfurt prod:
+  extends: .test
+  variables:
+    URL: https://basket-prod.frankfurt.moz.works
