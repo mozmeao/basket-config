@@ -77,6 +77,15 @@ deploy frankfurt stage:
     changes:
       - "frankfurt/basket-stage/*"
 
+deploy oregon-a admin:
+  extends: .deploy
+  stage: deploy-admin
+  variables:
+    DEPLOYMENT: oregon-a/basket-admin
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+  only:
+    changes:
+      - "oregon-a/basket-admin/*"
 .test:
   stage: test
   tags:
