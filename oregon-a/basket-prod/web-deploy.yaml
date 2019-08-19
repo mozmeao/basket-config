@@ -5,7 +5,7 @@ metadata:
   labels:
     app: basket-prod
     type: web
-  name: basket-prod-web
+  name: basket-prod-temp
   namespace: basket-prod
 spec:
   progressDeadlineSeconds: 600
@@ -26,7 +26,7 @@ spec:
       labels:
         app: basket-prod
         type: web
-      name: basket-prod-web
+      name: basket-prod-temp
       namespace: basket-prod
     spec:
       containers:
@@ -285,7 +285,7 @@ spec:
           value: "4"
         - name: conflicts
           value: "1"
-        image: mozmeao/basket:4d0668d4e5cb304e68b04bcc0d2b278d27b591e6
+        image: mozmeao/basket:891b5b8f93663793fa79f2035c5064c79cc517e6
         imagePullPolicy: IfNotPresent
         name: basket-prod-web
         readinessProbe:

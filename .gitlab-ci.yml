@@ -96,6 +96,16 @@ deploy oregon-b admin:
   only:
     changes:
       - "oregon-b/basket-admin/*"
+
+deploy oregon-a prod:
+  extends: .deploy
+  variables:
+    DEPLOYMENT: oregon-a/basket-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+  only:
+    changes:
+      - "oregon-a/basket-prod/*"
+
 .test:
   stage: test
   tags:
@@ -121,3 +131,13 @@ test stage:
   extends: .test
   variables:
     URL: https://basket.allizom.org
+
+test admin:
+  extends: .test
+  variables:
+    URL: https://admin.basket.moz.works
+
+test prod:
+  extends: .test
+  variables:
+    URL: https://basket.mozilla.org
