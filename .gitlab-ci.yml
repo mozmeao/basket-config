@@ -86,6 +86,16 @@ deploy oregon-a admin:
   only:
     changes:
       - "oregon-a/basket-admin/*"
+
+deploy oregon-b admin:
+  extends: .deploy
+  stage: deploy-admin
+  variables:
+    DEPLOYMENT: oregon-b/basket-admin
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
+  only:
+    changes:
+      - "oregon-b/basket-admin/*"
 .test:
   stage: test
   tags:
