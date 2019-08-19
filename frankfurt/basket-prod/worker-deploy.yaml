@@ -6,7 +6,7 @@ metadata:
   labels:
     app: basket-prod
     type: worker
-  name: basket-prod-worker-temp
+  name: basket-prod-worker
   namespace: basket-prod
 spec:
   progressDeadlineSeconds: 600
@@ -27,7 +27,7 @@ spec:
       labels:
         app: basket-prod
         type: worker
-      name: basket-prod-worker-temp
+      name: basket-prod-worker
       namespace: basket-prod
     spec:
       containers:
