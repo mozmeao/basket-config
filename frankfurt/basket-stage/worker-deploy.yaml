@@ -169,7 +169,7 @@ spec:
               name: basket-stage-secrets
         - name: TASK_LOCKING_ENABLE
           value: "True"
-        image: mozmeao/basket:24c277b9
+        image: mozmeao/basket:fbe0d990
         imagePullPolicy: Always
         name: basket-stage-worker
         resources: {}
