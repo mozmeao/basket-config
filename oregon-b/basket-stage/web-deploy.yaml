@@ -135,6 +135,11 @@ spec:
               name: basket-stage-secrets
         - name: FXA_OAUTH_SERVER_ENV
           value: stage
+        - name: KOMBU_FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: kombu-fernet-key
+              name: basket-stage-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
