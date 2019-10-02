@@ -138,6 +138,11 @@ spec:
           value: stage
         - name: HTTPS
           value: "on"
+        - name: KOMBU_FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: kombu-fernet-key
+              name: basket-stage-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
