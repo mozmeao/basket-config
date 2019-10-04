@@ -271,7 +271,13 @@ spec:
         image: mozmeao/basket:d3f3d6c4
         imagePullPolicy: IfNotPresent
         name: basket-dev-worker
-        resources: {}
+        resources:
+          limits:
+            cpu: 500m
+            memory: 600Mi
+          requests:
+            cpu: 250m
+            memory: 300Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
