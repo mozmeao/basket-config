@@ -271,6 +271,8 @@ spec:
           value: datadog-statsd.datadog.svc.cluster.local
         - name: STATSD_PREFIX
           value: basket-prod-oregon-b
+        - name: SUBHUB_OPP_RECORD_TYPE
+          value: 0124O000000R0ODQA0
         - name: SUPERTOKEN
           valueFrom:
             secretKeyRef:
