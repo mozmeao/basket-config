@@ -234,9 +234,9 @@ spec:
         name: basket-stage-worker
         resources:
           limits:
-            memory: 600Mi
+            memory: 1200Mi
           requests:
-            memory: 300Mi
+            memory: 600Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
