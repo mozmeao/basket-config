@@ -163,28 +163,58 @@ test dev:
   extends: .test
   variables:
     URL: http://basket-dev.moz.works
+  only:
+    changes:
+      - "oregon-*/basket-dev/*"
+    refs:
+      - master
 
 test admin-stage:
   extends: .test
   variables:
     URL: https://admin-stage.basket.moz.works
+  only:
+    changes:
+      - "oregon-*/basket-admin-stage/*"
+    refs:
+      - master
 
 test stage:
   extends: .test
   variables:
     URL: https://basket.allizom.org
+  only:
+    changes:
+      - "oregon-*/basket-stage/*"
+    refs:
+      - master
 
 test admin:
   extends: .test
   variables:
     URL: https://admin.basket.moz.works
+  only:
+    changes:
+      - "oregon-*/basket-admin/*"
+    refs:
+      - master
 
 test prod:
   extends: .test
   variables:
     URL: https://basket.mozilla.org
+  only:
+    changes:
+      - "oregon-*/basket-prod/*"
+    refs:
+      - master
 
 test frankfurt prod:
   extends: .test
   variables:
     URL: https://basket-prod.frankfurt.moz.works
+  only:
+    changes:
+      - "frankfurt/basket-prod/*"
+    refs:
+      - master
