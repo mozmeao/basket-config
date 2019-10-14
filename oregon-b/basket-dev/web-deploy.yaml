@@ -183,7 +183,7 @@ spec:
               key: new-relic-license-key
               name: basket-dev-secrets
         - name: OIDC_ENABLE
-          value: "False"
+          value: "True"
         - name: OIDC_OP_AUTHORIZATION_ENDPOINT
           value: https://auth.mozilla.auth0.com/authorize
         - name: OIDC_OP_TOKEN_ENDPOINT
