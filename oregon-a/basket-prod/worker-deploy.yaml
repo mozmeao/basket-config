@@ -197,6 +197,11 @@ spec:
               name: basket-prod-secrets
         - name: HTTPS
           value: "on"
+        - name: KOMBU_FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: kombu-fernet-key
+              name: basket-prod-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
