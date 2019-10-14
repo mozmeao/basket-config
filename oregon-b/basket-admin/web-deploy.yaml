@@ -102,6 +102,11 @@ spec:
               name: basket-admin-secrets
         - name: EXACTTARGET_USE_SANDBOX
           value: "False"
+        - name: KOMBU_FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: kombu-fernet-key
+              name: basket-admin-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
