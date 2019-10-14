@@ -20,6 +20,8 @@ deploy oregon-a dev:
   only:
     changes:
       - "oregon-a/basket-dev/*"
+    refs:
+      - master
 
 deploy oregon-b dev:
   extends: .deploy
@@ -29,6 +31,8 @@ deploy oregon-b dev:
   only:
     changes:
       - "oregon-b/basket-dev/*"
+    refs:
+      - master
 
 deploy oregon-a admin-stage:
   extends: .deploy
@@ -39,6 +43,8 @@ deploy oregon-a admin-stage:
   only:
     changes:
       - "oregon-a/basket-admin-stage/*"
+    refs:
+      - master
 
 deploy oregon-b admin-stage:
   extends: .deploy
@@ -49,6 +55,8 @@ deploy oregon-b admin-stage:
   only:
     changes:
       - "oregon-b/basket-admin-stage/*"
+    refs:
+      - master
 
 deploy oregon-a stage:
   extends: .deploy
@@ -58,6 +66,8 @@ deploy oregon-a stage:
   only:
     changes:
       - "oregon-a/basket-stage/*"
+    refs:
+      - master
 
 deploy oregon-b stage:
   extends: .deploy
@@ -67,6 +77,8 @@ deploy oregon-b stage:
   only:
     changes:
       - "oregon-b/basket-stage/*"
+    refs:
+      - master
 
 deploy frankfurt stage:
   extends: .deploy
@@ -76,6 +88,8 @@ deploy frankfurt stage:
   only:
     changes:
       - "frankfurt/basket-stage/*"
+    refs:
+      - master
 
 deploy oregon-a admin:
   extends: .deploy
@@ -86,6 +100,8 @@ deploy oregon-a admin:
   only:
     changes:
       - "oregon-a/basket-admin/*"
+    refs:
+      - master
 
 deploy oregon-b admin:
   extends: .deploy
@@ -96,6 +112,8 @@ deploy oregon-b admin:
   only:
     changes:
       - "oregon-b/basket-admin/*"
+    refs:
+      - master
 
 deploy oregon-a prod:
   extends: .deploy
@@ -105,6 +123,8 @@ deploy oregon-a prod:
   only:
     changes:
       - "oregon-a/basket-prod/*"
+    refs:
+      - master
 
 deploy oregon-b prod:
   extends: .deploy
@@ -114,6 +134,8 @@ deploy oregon-b prod:
   only:
     changes:
       - "oregon-b/basket-prod/*"
+    refs:
+      - master
 
 deploy frankfurt prod:
   extends: .deploy
@@ -123,6 +145,8 @@ deploy frankfurt prod:
   only:
     changes:
       - "frankfurt/basket-prod/*"
+    refs:
+      - master
 
 .test:
   stage: test
