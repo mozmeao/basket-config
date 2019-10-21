@@ -296,7 +296,7 @@ spec:
           value: "4"
         - name: conflicts
           value: "1"
-        image: mozmeao/basket:530c8e7e
+        image: mozmeao/basket:e5fbaa77
         imagePullPolicy: IfNotPresent
         name: basket-prod-donateworker
         resources: {}
