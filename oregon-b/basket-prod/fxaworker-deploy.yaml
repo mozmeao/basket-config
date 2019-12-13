@@ -295,7 +295,7 @@ spec:
           value: "4"
         - name: conflicts
           value: "1"
-        image: mozmeao/basket:d4786007
+        image: mozmeao/basket:4ab85dd2
         imagePullPolicy: IfNotPresent
         name: basket-prod-fxaworker
         resources: {}
