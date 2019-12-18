@@ -214,6 +214,16 @@ spec:
         image: mozmeao/basket:671dac49
         imagePullPolicy: Always
         name: basket-prod-web
+        livenessProbe:
+          failureThreshold: 4
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            path: /healthz/
+            scheme: HTTP
+            port: 8000
         readinessProbe:
           failureThreshold: 1
           initialDelaySeconds: 5
