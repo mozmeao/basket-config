@@ -1,7 +1,27 @@
 stages:
+  - pre-notify
   - deploy-admin
   - deploy
   - test
+  - post-notify
+
+notify start:
+  stage: pre-notify
+  only:
+    - master
+  tags:
+    - aws
+    - meao
+  script: ./slack-notify --stage deploy --status starting
+
+notify done:
+  stage: post-notify
+  only:
+    - master
+  tags:
+    - aws
+    - meao
+  script: ./slack-notify --stage deploy --status shipped
 
 .deploy:
   stage: deploy
