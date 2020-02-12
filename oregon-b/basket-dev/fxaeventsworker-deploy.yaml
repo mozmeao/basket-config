@@ -156,6 +156,8 @@ spec:
             secretKeyRef:
               key: fxa-events-secret-access-key
               name: basket-dev-secrets
+        - name: FXA_EVENTS_VERIFIED_SFDC_ENABLE
+          value: "True"
         - name: HTTPS
           value: "on"
         - name: KOMBU_FERNET_KEY
