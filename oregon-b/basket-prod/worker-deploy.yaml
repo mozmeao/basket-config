@@ -264,6 +264,8 @@ spec:
             secretKeyRef:
               key: sfdc-username
               name: basket-prod-secrets
+        - name: SFDC_REQUEST_TIMEOUT
+          value: 90
         - name: SNITCH_ID
           valueFrom:
             secretKeyRef:
