@@ -48,6 +48,8 @@ spec:
           value: "5"
         - name: CLUSTER_NAME
           value: "oregon-b"
+        - name: COMMON_VOICE_BATCH_UPDATES
+          value: "True"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:

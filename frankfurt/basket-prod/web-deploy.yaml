@@ -44,6 +44,8 @@ spec:
           value: "False"
         - name: CLUSTER_NAME
           value: "frankfurt"
+        - name: COMMON_VOICE_BATCH_UPDATES
+          value: "True"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
