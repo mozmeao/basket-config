@@ -290,7 +290,7 @@ spec:
               key: sync-key
               name: basket-prod-secrets
         - name: TASK_LOCKING_ENABLE
-          value: "False"
+          value: "True"
         - name: TASK_LOCK_TIMEOUT
           value: "10"
         - name: WSGI_NUM_WORKERS
