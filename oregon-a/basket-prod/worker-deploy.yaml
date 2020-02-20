@@ -48,6 +48,10 @@ spec:
           value: "5"
         - name: CLUSTER_NAME
           value: "oregon-a"
+        - name: COMMON_VOICE_BATCH_PROCESSING
+          value: "True"
+        - name: COMMON_VOICE_BATCH_CHUNK_SIZE
+          value: "10000"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
