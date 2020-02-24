@@ -219,7 +219,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-oregon-b;basket-prod
+          value: basket-prod-oregon-a;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -273,7 +273,7 @@ spec:
         - name: STATSD_HOST
           value: datadog-statsd.datadog.svc.cluster.local
         - name: STATSD_PREFIX
-          value: basket-prod-oregon-b
+          value: basket-prod-oregon-a
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
         - name: SUPERTOKEN
