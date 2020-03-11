@@ -177,6 +177,8 @@ spec:
             secretKeyRef:
               key: fxa-events-secret-access-key
               name: basket-prod-secrets
+        - name: FXA_EVENTS_VERIFIED_SFDC_ENABLE
+          value: "True"
         - name: FXA_LOGIN_CUTOVER_TIMESTAMP
           valueFrom:
             secretKeyRef:

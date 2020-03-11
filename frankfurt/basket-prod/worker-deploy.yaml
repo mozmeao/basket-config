@@ -113,6 +113,8 @@ spec:
             secretKeyRef:
               key: fxa-client-secret
               name: basket-prod-secrets
+        - name: FXA_EVENTS_VERIFIED_SFDC_ENABLE
+          value: "True"
         - name: FXA_OAUTH_SERVER_ENV
           value: production
         - name: HTTPS
