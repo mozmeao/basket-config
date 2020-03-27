@@ -198,7 +198,7 @@ spec:
         - name: STATSD_CLIENT
           value: django_statsd.clients.normal
         - name: STATSD_PREFIX
-          value: basket-admin-oregon-b
+          value: basket-admin
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
         - name: SUPERTOKEN
