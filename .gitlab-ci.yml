@@ -11,7 +11,7 @@ notify start:
     - master
   tags:
     - aws
-    - meao
+    - mozmeao
   script: ./slack-notify --stage deploy --status starting
 
 notify done:
@@ -20,14 +20,14 @@ notify done:
     - master
   tags:
     - aws
-    - meao
+    - mozmeao
   script: ./slack-notify --stage deploy --status shipped
 
 .deploy:
   stage: deploy
   tags:
     - aws
-    - meao
+    - mozmeao
   script:
     - kubectl apply -f ${DEPLOYMENT}
     - ./rollout-status.sh ${DEPLOYMENT}
@@ -172,7 +172,7 @@ deploy frankfurt prod:
   stage: test
   tags:
     - aws
-    - meao
+    - mozmeao
   retry:
     max: 1
     when: always
