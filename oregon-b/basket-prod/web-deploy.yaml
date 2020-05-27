@@ -299,7 +299,7 @@ spec:
           value: "4"
         - name: conflicts
           value: "1"
-        image: mozmeao/basket:b2e7696f
+        image: mozmeao/basket:0ced7ae6
         imagePullPolicy: IfNotPresent
         name: basket-prod-web
         livenessProbe:
