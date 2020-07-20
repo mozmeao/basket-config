@@ -136,6 +136,8 @@ spec:
               name: basket-dev-secrets
         - name: FXA_EVENTS_QUEUE_ENABLE
           value: "True"
+        - name: FXA_EVENTS_QUEUE_IGNORE_MODE
+          value: "True"
         - name: FXA_EVENTS_QUEUE_REGION
           value: us-east-1
         - name: FXA_EVENTS_QUEUE_URL
