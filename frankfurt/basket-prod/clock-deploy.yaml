@@ -213,7 +213,7 @@ spec:
           value: "4"
         - name: conflicts
           value: "1"
-        image: mozmeao/basket:de19f942
+        image: mozmeao/basket:a2befe84
         imagePullPolicy: Always
         name: basket-prod-clock
         resources: {}
