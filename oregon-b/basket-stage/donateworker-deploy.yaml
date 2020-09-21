@@ -227,7 +227,7 @@ spec:
           value: "True"
         - name: WSGI_NUM_WORKERS
           value: "4"
-        image: mozmeao/basket:4f6fd581
+        image: mozmeao/basket:e445ab67
         imagePullPolicy: IfNotPresent
         name: basket-stage-donateworker
         resources: {}
