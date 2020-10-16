@@ -9,7 +9,7 @@ metadata:
   namespace: basket-admin
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -102,8 +102,6 @@ spec:
               name: basket-admin-secrets
         - name: EXACTTARGET_USE_SANDBOX
           value: "False"
-        - name: HTTPS
-          value: "on"
         - name: KOMBU_FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -122,7 +120,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-admin-oregon-b;basket-admin
+          value: basket-admin-oregon-a
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -147,6 +145,11 @@ spec:
           valueFrom:
             secretKeyRef:
               key: oidc-rp-client-secret
+              name: basket-admin-secrets
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
               name: basket-admin-secrets
         - name: REDIS_CACHE_DB
           value: "5"
@@ -232,22 +235,3 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: "2019-02-12T22:20:35Z"
-    lastUpdateTime: "2019-02-12T22:20:35Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2019-02-12T21:55:31Z"
-    lastUpdateTime: "2019-07-10T16:49:42Z"
-    message: ReplicaSet "basket-admin-web-6b87f99885" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 50
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1

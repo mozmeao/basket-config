@@ -43,17 +43,6 @@ deploy oregon-a dev:
     refs:
       - master
 
-deploy oregon-b dev:
-  extends: .deploy
-  variables:
-    DEPLOYMENT: oregon-b/basket-dev
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
-  only:
-    changes:
-      - "oregon-b/basket-dev/*"
-    refs:
-      - master
-
 deploy oregon-a admin-stage:
   extends: .deploy
   stage: deploy-admin
@@ -66,18 +55,6 @@ deploy oregon-a admin-stage:
     refs:
       - master
 
-deploy oregon-b admin-stage:
-  extends: .deploy
-  stage: deploy-admin
-  variables:
-    DEPLOYMENT: oregon-b/basket-admin-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
-  only:
-    changes:
-      - "oregon-b/basket-admin-stage/*"
-    refs:
-      - master
-
 deploy oregon-a stage:
   extends: .deploy
   variables:
@@ -86,17 +63,6 @@ deploy oregon-a stage:
   only:
     changes:
       - "oregon-a/basket-stage/*"
-    refs:
-      - master
-
-deploy oregon-b stage:
-  extends: .deploy
-  variables:
-    DEPLOYMENT: oregon-b/basket-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
-  only:
-    changes:
-      - "oregon-b/basket-stage/*"
     refs:
       - master
 
@@ -123,18 +89,6 @@ deploy oregon-a admin:
     refs:
       - master
 
-deploy oregon-b admin:
-  extends: .deploy
-  stage: deploy-admin
-  variables:
-    DEPLOYMENT: oregon-b/basket-admin
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
-  only:
-    changes:
-      - "oregon-b/basket-admin/*"
-    refs:
-      - master
-
 deploy oregon-a prod:
   extends: .deploy
   variables:
@@ -143,17 +97,6 @@ deploy oregon-a prod:
   only:
     changes:
       - "oregon-a/basket-prod/*"
-    refs:
-      - master
-
-deploy oregon-b prod:
-  extends: .deploy
-  variables:
-    DEPLOYMENT: oregon-b/basket-prod
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
-  only:
-    changes:
-      - "oregon-b/basket-prod/*"
     refs:
       - master
 

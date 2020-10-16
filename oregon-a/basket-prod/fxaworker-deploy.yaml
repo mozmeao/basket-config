@@ -2,11 +2,10 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
-  generation: 30
   labels:
     app: basket-prod
-    type: clock
-  name: basket-prod-clock
+    type: fxaworker
+  name: basket-prod-fxaworker
   namespace: basket-prod
 spec:
   progressDeadlineSeconds: 600
@@ -15,7 +14,7 @@ spec:
   selector:
     matchLabels:
       app: basket-prod
-      type: clock
+      type: fxaworker
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -26,13 +25,13 @@ spec:
       creationTimestamp: null
       labels:
         app: basket-prod
-        type: clock
-      name: basket-prod-clock
+        type: fxaworker
+      name: basket-prod-fxaworker
       namespace: basket-prod
     spec:
       containers:
       - args:
-        - bin/run-clock.sh
+        - bin/run-fxa-activity-worker.sh
         command:
         - /bin/bash
         - -c
@@ -48,11 +47,7 @@ spec:
         - name: CELERY_REDIS_MAX_CONNECTIONS
           value: "5"
         - name: CLUSTER_NAME
-          value: "oregon-b"
-        - name: COMMON_VOICE_BATCH_PROCESSING
-          value: "True"
-        - name: COMMON_VOICE_BATCH_CHUNK_SIZE
-          value: "10000"
+          value: "oregon-a"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -220,7 +215,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-oregon-b;basket-prod
+          value: basket-prod-oregon-a;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -304,7 +299,7 @@ spec:
           value: "1"
         image: mozmeao/basket:9fcaa499
         imagePullPolicy: IfNotPresent
-        name: basket-prod-clock
+        name: basket-prod-fxaworker
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File

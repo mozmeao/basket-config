@@ -3,56 +3,50 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: basket-prod
-    type: fxaeventsworker
-  name: basket-prod-fxaeventsworker
-  namespace: basket-prod
+    app: basket-stage
+    type: donateworker
+  name: basket-stage-donateworker
+  namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: basket-prod
-      type: fxaeventsworker
+      app: basket-stage
+      type: donateworker
   strategy:
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 3
       maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: basket-prod
-        type: fxaeventsworker
-      name: basket-prod-fxaeventsworker
-      namespace: basket-prod
+        app: basket-stage
+        type: donateworker
+      name: basket-stage-donateworker
+      namespace: basket-stage
     spec:
       containers:
       - args:
-        - bin/run-fxa-events-worker.sh
+        - bin/run-donate-worker.sh
         command:
         - /bin/bash
         - -c
         env:
         - name: ADMIN_REDIRECT_URL
-          value: https://admin.basket.moz.works/admin/
+          value: https://admin-stage.basket.moz.works/admin/
         - name: ALLOWED_HOSTS
           value: "*"
         - name: CELERY_ALWAYS_EAGER
           value: "False"
-        - name: CELERY_NUM_WORKERS
-          value: "5"
-        - name: CELERY_REDIS_MAX_CONNECTIONS
-          value: "5"
-        - name: CLUSTER_NAME
-          value: "oregon-b"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               key: database-url
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: DEBUG
           value: "False"
         - name: DISABLE_ADMIN
@@ -61,14 +55,9 @@ spec:
           valueFrom:
             secretKeyRef:
               key: donate-access-key-id
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: DONATE_CONTACT_RECORD_TYPE
           value: 0120B0000005iGB
-        - name: DONATE_NOTIFY_EMAIL
-          valueFrom:
-            secretKeyRef:
-              key: donate-notify-email
-              name: basket-prod-secrets
         - name: DONATE_OPP_RECORD_TYPE
           value: 0120B000000t6NV
         - name: DONATE_QUEUE_REGION
@@ -77,32 +66,27 @@ spec:
           valueFrom:
             secretKeyRef:
               key: donate-queue-url
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: DONATE_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: donate-secret-access-key
-              name: basket-prod-secrets
-        - name: DONATE_SNITCH_ID
-          valueFrom:
-            secretKeyRef:
-              key: donate-snitch-id
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
               key: email-host
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: EMAIL_HOST_PASSWORD
           valueFrom:
             secretKeyRef:
               key: email-host-password
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: EMAIL_HOST_USER
           valueFrom:
             secretKeyRef:
               key: email-host-user
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: EMAIL_PORT
           value: "587"
         - name: EMAIL_USE_TLS
@@ -111,95 +95,50 @@ spec:
           valueFrom:
             secretKeyRef:
               key: et-client-id
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: ET_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: et-client-secret
-              name: basket-prod-secrets
-        - name: EXACTTARGET_CONFIRMATION
-          value: Confirmation
-        - name: EXACTTARGET_DATA
-          value: Master_Subscribers
-        - name: EXACTTARGET_INTERESTS
-          value: GET_INVOLVED
-        - name: EXACTTARGET_OPTIN_STAGE
-          value: Double_Opt_In
-        - name: EXACTTARGET_PASS
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-pass
-              name: basket-prod-secrets
-        - name: EXACTTARGET_USER
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-user
-              name: basket-prod-secrets
-        - name: EXACTTARGET_USE_SANDBOX
-          value: "False"
+              name: basket-stage-secrets
         - name: EXTRA_SUPPORTED_LANGS
           value: zh-tw
-        - name: FXA_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              key: fxa-access-key-id
-              name: basket-prod-secrets
         - name: FXA_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: fxa-client-id
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: FXA_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: fxa-client-secret
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: FXA_EVENTS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: fxa-events-access-key-id
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: FXA_EVENTS_QUEUE_ENABLE
           value: "True"
         - name: FXA_EVENTS_QUEUE_REGION
-          value: us-west-2
+          value: us-east-1
         - name: FXA_EVENTS_QUEUE_URL
           valueFrom:
             secretKeyRef:
               key: fxa-events-queue-url
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: FXA_EVENTS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: fxa-events-secret-access-key
-              name: basket-prod-secrets
-        - name: FXA_LOGIN_CUTOVER_TIMESTAMP
-          valueFrom:
-            secretKeyRef:
-              key: fxa-login-cutover-timestamp
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: FXA_OAUTH_SERVER_ENV
-          value: production
-        - name: FXA_S3_BUCKET
-          valueFrom:
-            secretKeyRef:
-              key: fxa-s3-bucket
-              name: basket-prod-secrets
-        - name: FXA_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              key: fxa-secret-access-key
-              name: basket-prod-secrets
-        - name: FXA_SNITCH_URL
-          valueFrom:
-            secretKeyRef:
-              key: fxa-snitch-url
-              name: basket-prod-secrets
+          value: stage
         - name: KOMBU_FERNET_KEY
           valueFrom:
             secretKeyRef:
               key: kombu-fernet-key
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
@@ -211,64 +150,59 @@ spec:
         - name: MAINTENANCE_MODE
           value: "False"
         - name: MAINTENANCE_READ_ONLY
-          value: "False"
+          value: "True"
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-oregon-b;basket-prod
+          value: basket-stage-oregon-a;basket-stage
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
-              name: basket-prod-secrets
-        - name: PORT
-          valueFrom:
-            secretKeyRef:
-              key: port
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: REDIS_CACHE_DB
-          value: "5"
+          value: "3"
         - name: REDIS_CELERY_DB
-          value: "4"
+          value: "2"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
               key: redis-url
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: secret-key
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: SECURE_SSL_REDIRECT
           value: "True"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
               key: sentry-dsn
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: SFDC_PASSWORD
           valueFrom:
             secretKeyRef:
               key: sfdc-password
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: SFDC_SEC_TOKEN
           valueFrom:
             secretKeyRef:
               key: sfdc-sec-token
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: SFDC_USERNAME
           valueFrom:
             secretKeyRef:
               key: sfdc-username
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: SNITCH_ID
           valueFrom:
             secretKeyRef:
               key: snitch-id
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: STATSD_CLIENT
           value: django_statsd.clients.normal
         - name: STATSD_HOST
@@ -276,30 +210,26 @@ spec:
         - name: STATSD_PORT
           value: "9125"
         - name: STATSD_PREFIX
-          value: basket-prod
+          value: basket-stage
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
         - name: SUPERTOKEN
           valueFrom:
             secretKeyRef:
               key: supertoken
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:
               key: sync-key
-              name: basket-prod-secrets
+              name: basket-stage-secrets
         - name: TASK_LOCKING_ENABLE
           value: "True"
-        - name: TASK_LOCK_TIMEOUT
-          value: "10"
         - name: WSGI_NUM_WORKERS
           value: "4"
-        - name: conflicts
-          value: "1"
-        image: mozmeao/basket:9fcaa499
+        image: mozmeao/basket:e8e855be
         imagePullPolicy: IfNotPresent
-        name: basket-prod-fxaeventsworker
+        name: basket-stage-donateworker
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File

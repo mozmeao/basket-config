@@ -2,11 +2,10 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
-  generation: 30
   labels:
     app: basket-prod
-    type: donateworker
-  name: basket-prod-donateworker
+    type: fxaeventsworker
+  name: basket-prod-fxaeventsworker
   namespace: basket-prod
 spec:
   progressDeadlineSeconds: 600
@@ -15,7 +14,7 @@ spec:
   selector:
     matchLabels:
       app: basket-prod
-      type: donateworker
+      type: fxaeventsworker
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -26,13 +25,13 @@ spec:
       creationTimestamp: null
       labels:
         app: basket-prod
-        type: donateworker
-      name: basket-prod-donateworker
+        type: fxaeventsworker
+      name: basket-prod-fxaeventsworker
       namespace: basket-prod
     spec:
       containers:
       - args:
-        - bin/run-donate-worker.sh
+        - bin/run-fxa-events-worker.sh
         command:
         - /bin/bash
         - -c
@@ -48,7 +47,7 @@ spec:
         - name: CELERY_REDIS_MAX_CONNECTIONS
           value: "5"
         - name: CLUSTER_NAME
-          value: "oregon-b"
+          value: "oregon-a"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -216,7 +215,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-oregon-b;basket-prod
+          value: basket-prod-oregon-a;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -300,7 +299,7 @@ spec:
           value: "1"
         image: mozmeao/basket:9fcaa499
         imagePullPolicy: IfNotPresent
-        name: basket-prod-donateworker
+        name: basket-prod-fxaeventsworker
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
