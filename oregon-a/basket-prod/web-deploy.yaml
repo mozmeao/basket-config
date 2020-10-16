@@ -17,7 +17,7 @@ spec:
       type: web
   strategy:
     rollingUpdate:
-      maxSurge: 4
+      maxSurge: 3
       maxUnavailable: 0
     type: RollingUpdate
   template:
@@ -197,8 +197,6 @@ spec:
             secretKeyRef:
               key: fxa-snitch-url
               name: basket-prod-secrets
-        - name: HTTPS
-          value: "on"
         - name: KOMBU_FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -226,6 +224,11 @@ spec:
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
+              name: basket-prod-secrets
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
               name: basket-prod-secrets
         - name: REDIS_CACHE_DB
           value: "5"

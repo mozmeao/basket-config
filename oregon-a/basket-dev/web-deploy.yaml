@@ -9,7 +9,7 @@ metadata:
   namespace: basket-dev
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -17,7 +17,7 @@ spec:
       type: web
   strategy:
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 3
       maxUnavailable: 0
     type: RollingUpdate
   template:
@@ -99,7 +99,10 @@ spec:
               key: email-host-user
               name: basket-dev-secrets
         - name: EMAIL_PORT
-          value: "587"
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: basket-dev-secrets
         - name: EMAIL_USE_TLS
           value: "True"
         - name: EXACTTARGET_CONFIRMATION
@@ -280,7 +283,7 @@ spec:
           timeoutSeconds: 5
         resources:
           limits:
-            cpu: 500m
+            cpu: "1"
             memory: 1200Mi
           requests:
             cpu: 250m

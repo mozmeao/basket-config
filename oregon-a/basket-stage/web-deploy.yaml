@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
+  generation: 165
   labels:
     app: basket-stage
     type: web
@@ -9,7 +10,7 @@ metadata:
   namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
-  replicas: 2
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -17,7 +18,7 @@ spec:
       type: web
   strategy:
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 3
       maxUnavailable: 0
     type: RollingUpdate
   template:
@@ -42,8 +43,6 @@ spec:
           value: "*"
         - name: CELERY_ALWAYS_EAGER
           value: "False"
-        - name: CLUSTER_NAME
-          value: "oregon-a"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -136,8 +135,6 @@ spec:
               name: basket-stage-secrets
         - name: FXA_OAUTH_SERVER_ENV
           value: stage
-        - name: HTTPS
-          value: "on"
         - name: KOMBU_FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -158,7 +155,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-stage-oregon-b;basket-stage
+          value: basket-stage-oregon-a;basket-stage
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -234,16 +231,6 @@ spec:
         image: mozmeao/basket:e8e855be
         imagePullPolicy: IfNotPresent
         name: basket-stage-web
-        livenessProbe:
-          failureThreshold: 4
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 5
-          httpGet:
-            path: /healthz/
-            scheme: HTTP
-            port: 8000
         readinessProbe:
           failureThreshold: 1
           initialDelaySeconds: 5

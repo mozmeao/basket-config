@@ -36,6 +36,8 @@ spec:
         - /bin/bash
         - -c
         env:
+        - name: ALLOWED_HOSTS
+          value: "*"
         - name: BUILDPACK_URL
           value: https://github.com/pmclanahan/heroku-buildpack-python-peep
         - name: CELERY_ALWAYS_EAGER
@@ -97,7 +99,10 @@ spec:
               key: email-host-user
               name: basket-dev-secrets
         - name: EMAIL_PORT
-          value: "587"
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: basket-dev-secrets
         - name: EMAIL_USE_TLS
           value: "True"
         - name: EXACTTARGET_CONFIRMATION
@@ -141,6 +146,8 @@ spec:
             secretKeyRef:
               key: fxa-events-secret-access-key
               name: basket-dev-secrets
+        - name: FXA_EVENTS_VERIFIED_SFDC_ENABLE
+          value: "True"
         - name: HTTPS
           value: "on"
         - name: KOMBU_FERNET_KEY

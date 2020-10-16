@@ -42,8 +42,6 @@ spec:
           value: "*"
         - name: CELERY_ALWAYS_EAGER
           value: "False"
-        - name: CLUSTER_NAME
-          value: "oregon-a"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -136,8 +134,6 @@ spec:
               name: basket-stage-secrets
         - name: FXA_OAUTH_SERVER_ENV
           value: stage
-        - name: HTTPS
-          value: "on"
         - name: KOMBU_FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -158,7 +154,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-stage-oregon-b;basket-stage
+          value: basket-stage-oregon-a;basket-stage
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -234,11 +230,7 @@ spec:
         image: mozmeao/basket:e8e855be
         imagePullPolicy: IfNotPresent
         name: basket-stage-worker
-        resources:
-          limits:
-            memory: 1200Mi
-          requests:
-            memory: 600Mi
+        resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
