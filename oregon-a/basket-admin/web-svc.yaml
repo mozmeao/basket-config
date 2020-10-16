@@ -1,21 +1,22 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: 2018-04-19T08:51:28Z
+  name: basket-admin-lb
   labels:
     app: basket-admin
-  name: basket-nodeport
   namespace: basket-admin
+  annotations:
+     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-west-2:236517346949:certificate/a6ddbe25-f5a0-4c2e-aa7f-02c328e30526"
+     external-dns.alpha.kubernetes.io/hostname: "admin-oregon-b.moz.works,admin.basket.moz.works,basket-admin.us-west.moz.works"
 spec:
-  externalTrafficPolicy: Cluster
+  type: LoadBalancer
   ports:
-  - name: http
-    nodePort: 31973
-    port: 80
-    protocol: TCP
+  - port: 443
+    name: https
     targetPort: 8000
+    protocol: TCP
   selector:
     app: basket-admin
     type: web
-  sessionAffinity: None
-  type: NodePort
