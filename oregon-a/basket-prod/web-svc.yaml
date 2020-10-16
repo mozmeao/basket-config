@@ -1,21 +1,22 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
+  name: basket-prod-lb
   labels:
     app: basket-prod
-  name: basket-nodeport
   namespace: basket-prod
+  annotations:
+     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-west-2:236517346949:certificate/ce86f1b1-7020-432f-9f79-b05c1e301d8e"
+     external-dns.alpha.kubernetes.io/hostname: "prod-oregon-b.basket.moz.works"
 spec:
-  externalTrafficPolicy: Cluster
+  type: LoadBalancer
   ports:
-  - name: http
-    nodePort: 32162
-    port: 80
-    protocol: TCP
+  - port: 443
+    name: https
     targetPort: 8000
+    protocol: TCP
   selector:
     app: basket-prod
     type: web
-  sessionAffinity: None
-  type: NodePort

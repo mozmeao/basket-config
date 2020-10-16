@@ -26,6 +26,7 @@ spec:
       labels:
         app: basket-admin-stage
         type: web
+        heritage: deis
       name: basket-admin-stage-web
       namespace: basket-admin-stage
     spec:

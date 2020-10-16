@@ -26,6 +26,7 @@ spec:
       labels:
         app: basket-prod
         type: web
+        heritage: deis
       name: basket-prod-web
       namespace: basket-prod
     spec:
