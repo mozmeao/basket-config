@@ -125,7 +125,7 @@ deploy frankfurt prod:
 test dev:
   extends: .test
   variables:
-    URL: http://basket-dev.moz.works
+    URL: https://basket-dev.allizom.org
   only:
     changes:
       - "oregon-*/basket-dev/*"
