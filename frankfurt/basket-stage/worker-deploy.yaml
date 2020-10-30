@@ -29,6 +29,8 @@ spec:
       name: basket-stage-worker
       namespace: basket-stage
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - bin/run-worker.sh
