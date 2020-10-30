@@ -30,6 +30,8 @@ spec:
       name: basket-prod-clock
       namespace: basket-prod
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - bin/run-clock.sh

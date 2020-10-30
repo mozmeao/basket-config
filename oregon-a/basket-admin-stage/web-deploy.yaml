@@ -30,6 +30,8 @@ spec:
       name: basket-admin-stage-web
       namespace: basket-admin-stage
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - bin/run-prod.sh

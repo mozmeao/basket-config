@@ -30,6 +30,8 @@ spec:
       name: basket-prod-donateworker
       namespace: basket-prod
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - bin/run-donate-worker.sh

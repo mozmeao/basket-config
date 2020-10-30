@@ -29,6 +29,8 @@ spec:
       name: basket-stage-donateworker
       namespace: basket-stage
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - bin/run-donate-worker.sh

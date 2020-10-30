@@ -29,6 +29,8 @@ spec:
       name: basket-prod-fxaeventsworker
       namespace: basket-prod
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - bin/run-fxa-events-worker.sh
