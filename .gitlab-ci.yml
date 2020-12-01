@@ -32,37 +32,37 @@ notify done:
     - kubectl apply -f ${DEPLOYMENT}
     - ./rollout-status.sh ${DEPLOYMENT}
 
-deploy oregon-a dev:
+deploy mozmeao-or dev:
   extends: .deploy
   variables:
-    DEPLOYMENT: oregon-a/basket-dev
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+    DEPLOYMENT: mozmeao-or/basket-dev
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or-1.kubeconfig
   only:
     changes:
-      - "oregon-a/basket-dev/*"
+      - "mozmeao-or/basket-dev/*"
     refs:
       - master
 
-deploy oregon-a admin-stage:
+deploy mozmeao-or admin-stage:
   extends: .deploy
   stage: deploy-admin
   variables:
-    DEPLOYMENT: oregon-a/basket-admin-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+    DEPLOYMENT: mozmeao-or/basket-admin-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
   only:
     changes:
-      - "oregon-a/basket-admin-stage/*"
+      - "mozmeao-or/basket-admin-stage/*"
     refs:
       - master
 
-deploy oregon-a stage:
+deploy mozmeao-or stage:
   extends: .deploy
   variables:
-    DEPLOYMENT: oregon-a/basket-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+    DEPLOYMENT: mozmeao-or/basket-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
   only:
     changes:
-      - "oregon-a/basket-stage/*"
+      - "mozmeao-or/basket-stage/*"
     refs:
       - master
 
@@ -77,26 +77,26 @@ deploy frankfurt stage:
     refs:
       - master
 
-deploy oregon-a admin:
+deploy mozmeao-or admin:
   extends: .deploy
   stage: deploy-admin
   variables:
-    DEPLOYMENT: oregon-a/basket-admin
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+    DEPLOYMENT: mozmeao-or/basket-admin
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
   only:
     changes:
-      - "oregon-a/basket-admin/*"
+      - "mozmeao-or/basket-admin/*"
     refs:
       - master
 
-deploy oregon-a prod:
+deploy mozmeao-or prod:
   extends: .deploy
   variables:
-    DEPLOYMENT: oregon-a/basket-prod
-    KUBECONFIG: /home/gitlab-runner/.kube/oregon-a.kubeconfig
+    DEPLOYMENT: mozmeao-or/basket-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
   only:
     changes:
-      - "oregon-a/basket-prod/*"
+      - "mozmeao-or/basket-prod/*"
     refs:
       - master
 

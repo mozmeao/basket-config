@@ -1,19 +1,19 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: basket-admin
+    app: basket-admin-stage
     type: web
-  name: basket-admin-web
-  namespace: basket-admin
+  name: basket-admin-stage-web
+  namespace: basket-admin-stage
 spec:
   progressDeadlineSeconds: 600
   replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: basket-admin
+      app: basket-admin-stage
       type: web
   strategy:
     rollingUpdate:
@@ -24,11 +24,11 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: basket-admin
+        app: basket-admin-stage
         type: web
         heritage: deis
-      name: basket-admin-web
-      namespace: basket-admin
+      name: basket-admin-stage-web
+      namespace: basket-admin-stage
     spec:
       imagePullSecrets:
         - name: dockerhub-registry
@@ -43,73 +43,48 @@ spec:
           value: "True"
         - name: ALLOWED_HOSTS
           value: "*"
+        - name: CELERY_ALWAYS_EAGER
+          value: "False"
         - name: CLUSTER_NAME
           value: "oregon-a"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               key: database-url
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: DEBUG
-          value: "False"
-        - name: DISABLE_ADMIN
           value: "False"
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
               key: email-host
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: EMAIL_HOST_PASSWORD
           valueFrom:
             secretKeyRef:
               key: email-host-password
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: EMAIL_HOST_USER
           valueFrom:
             secretKeyRef:
               key: email-host-user
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: EMAIL_PORT
           value: "587"
         - name: EMAIL_USE_TLS
           value: "True"
         - name: ENFORCE_HOSTNAME
-          value: admin.basket.moz.works
+          value: admin-stage.basket.moz.works
         - name: ET_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: et-client-id
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: ET_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: et-client-secret
-              name: basket-admin-secrets
-        - name: EXACTTARGET_CONFIRMATION
-          value: Confirmation
-        - name: EXACTTARGET_DATA
-          value: Master_Subscribers
-        - name: EXACTTARGET_INTERESTS
-          value: GET_INVOLVED
-        - name: EXACTTARGET_OPTIN_STAGE
-          value: Double_Opt_In
-        - name: EXACTTARGET_PASS
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-pass
-              name: basket-admin-secrets
-        - name: EXACTTARGET_USER
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-user
-              name: basket-admin-secrets
-        - name: EXACTTARGET_USE_SANDBOX
-          value: "False"
-        - name: KOMBU_FERNET_KEY
-          valueFrom:
-            secretKeyRef:
-              key: kombu-fernet-key
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
@@ -119,18 +94,20 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: MAINTENANCE_MODE
-          value: "False"
+          value: "True"
+        - name: MAINTENANCE_READ_ONLY
+          value: "True"
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-admin-oregon-a
+          value: basket-admin-stage-oregon-a
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: OIDC_ENABLE
           value: "True"
         - name: OIDC_OP_AUTHORIZATION_ENDPOINT
@@ -143,79 +120,86 @@ spec:
           valueFrom:
             secretKeyRef:
               key: oidc-rp-client-id
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: OIDC_RP_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: oidc-rp-client-secret
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: PORT
           valueFrom:
             secretKeyRef:
               key: port
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: REDIS_CACHE_DB
-          value: "5"
+          value: "3"
         - name: REDIS_CELERY_DB
-          value: "4"
+          value: "2"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
               key: redis-url
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: SAML_CREATE_USER
           value: "False"
         - name: SAML_ENABLE
           value: "True"
         - name: SAML_ENTITY_ID
-          value: basket-admin.us-west.moz.works/saml2/metadata/
+          value: basket-admin-stage.us-west.moz.works/saml2/metadata/
+        - name: SAML_REMOTE_METADATA
+          value: stage.xml
         - name: SAML_SSO_URL
-          value: https://basket-admin.us-west.moz.works/saml2/acs/
+          value: https://basket-admin-stage.us-west.moz.works/saml2/acs/
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: secret-key
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: SECURE_SSL_REDIRECT
           value: "True"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
               key: sentry-dsn
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: SFDC_PASSWORD
           valueFrom:
             secretKeyRef:
               key: sfdc-password
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: SFDC_SEC_TOKEN
           valueFrom:
             secretKeyRef:
               key: sfdc-sec-token
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: SFDC_USERNAME
           valueFrom:
             secretKeyRef:
               key: sfdc-username
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
         - name: STATSD_CLIENT
           value: django_statsd.clients.normal
         - name: STATSD_PREFIX
-          value: basket-admin
+          value: basket-admin-stage
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
         - name: SUPERTOKEN
           valueFrom:
             secretKeyRef:
               key: supertoken
-              name: basket-admin-secrets
+              name: basket-admin-stage-secrets
+        - name: SYNC_KEY
+          valueFrom:
+            secretKeyRef:
+              key: sync-key
+              name: basket-admin-stage-secrets
         - name: TASK_LOCKING_ENABLE
           value: "True"
         - name: WSGI_NUM_WORKERS
           value: "4"
-        image: mozmeao/basket:9fcaa499
+        image: mozmeao/basket:89c8b691
         imagePullPolicy: IfNotPresent
-        name: basket-admin-web
+        name: basket-admin-stage-web
         readinessProbe:
           failureThreshold: 1
           initialDelaySeconds: 5
