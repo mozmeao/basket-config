@@ -1,0 +1,283 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: basket-dev
+    type: worker
+  name: basket-dev-worker
+  namespace: basket-dev
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: basket-dev
+      type: worker
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: basket-dev
+        type: worker
+      name: basket-dev-worker
+      namespace: basket-dev
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
+      containers:
+      - args:
+        - bin/run-worker.sh
+        command:
+        - /bin/bash
+        - -c
+        env:
+        - name: ALLOWED_HOSTS
+          value: "*"
+        - name: BUILDPACK_URL
+          value: https://github.com/pmclanahan/heroku-buildpack-python-peep
+        - name: CELERY_ALWAYS_EAGER
+          value: "False"
+        - name: CELERY_NUM_WORKERS
+          value: "4"
+        - name: CELERY_POOL
+          value: prefork
+        - name: CLUSTER_NAME
+          value: "mozmeao-or"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: basket-dev-secrets
+        - name: DEBUG
+          value: "False"
+        - name: DONATE_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: donate-access-key-id
+              name: basket-dev-secrets
+        - name: DONATE_CONTACT_RECORD_TYPE
+          value: 012U00000001rnrIAA
+        - name: DONATE_NOTIFY_EMAIL
+          valueFrom:
+            secretKeyRef:
+              key: donate-notify-email
+              name: basket-dev-secrets
+        - name: DONATE_OPP_RECORD_TYPE
+          value: 0120B000000t6NVQAY
+        - name: DONATE_QUEUE_IGNORE_MODE
+          value: "True"
+        - name: DONATE_QUEUE_REGION
+          value: us-east-1
+        - name: DONATE_QUEUE_URL
+          valueFrom:
+            secretKeyRef:
+              key: donate-queue-url
+              name: basket-dev-secrets
+        - name: DONATE_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: donate-secret-access-key
+              name: basket-dev-secrets
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: basket-dev-secrets
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: basket-dev-secrets
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: basket-dev-secrets
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: basket-dev-secrets
+        - name: EMAIL_USE_TLS
+          value: "True"
+        - name: EXACTTARGET_CONFIRMATION
+          value: Confirmation
+        - name: EXACTTARGET_DATA
+          value: Master_Subscribers
+        - name: EXACTTARGET_INTERESTS
+          value: GET_INVOLVED
+        - name: EXACTTARGET_OPTIN_STAGE
+          value: Double_Opt_In
+        - name: EXACTTARGET_PASS
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-pass
+              name: basket-dev-secrets
+        - name: EXACTTARGET_USER
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-user
+              name: basket-dev-secrets
+        - name: EXACTTARGET_USE_SANDBOX
+          value: "True"
+        - name: EXTRA_SUPPORTED_LANGS
+          value: zh-tw
+        - name: FXA_EVENTS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-access-key-id
+              name: basket-dev-secrets
+        - name: FXA_EVENTS_QUEUE_ENABLE
+          value: "True"
+        - name: FXA_EVENTS_QUEUE_REGION
+          value: us-east-1
+        - name: FXA_EVENTS_QUEUE_URL
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-queue-url
+              name: basket-dev-secrets
+        - name: FXA_EVENTS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-secret-access-key
+              name: basket-dev-secrets
+        - name: FXA_EVENTS_VERIFIED_SFDC_ENABLE
+          value: "True"
+        - name: HTTPS
+          value: "on"
+        - name: KOMBU_FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: kombu-fernet-key
+              name: basket-dev-secrets
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NEWRELIC_INI_FILE
+          value: newrelic.ini
+        - name: NEW_RELIC_APP_NAME
+          value: basket-dev-mozmeao-or;basket-dev
+        - name: NEW_RELIC_CONFIG_FILE
+          value: /app/newrelic.ini
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: basket-dev-secrets
+        - name: OIDC_ENABLE
+          value: "True"
+        - name: OIDC_OP_AUTHORIZATION_ENDPOINT
+          value: https://auth.mozilla.auth0.com/authorize
+        - name: OIDC_OP_TOKEN_ENDPOINT
+          value: https://auth.mozilla.auth0.com/oauth/token
+        - name: OIDC_OP_USER_ENDPOINT
+          value: https://auth.mozilla.auth0.com/userinfo
+        - name: OIDC_RP_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: oidc-rp-client-id
+              name: basket-dev-secrets
+        - name: OIDC_RP_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: oidc-rp-client-secret
+              name: basket-dev-secrets
+        - name: REDIS_CACHE_DB
+          value: "1"
+        - name: REDIS_CELERY_DB
+          value: "0"
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              key: redis-url
+              name: basket-dev-secrets
+        - name: SAML_CREATE_USER
+          value: "False"
+        - name: SAML_ENABLE
+          value: "True"
+        - name: SAML_ENTITY_ID
+          value: basket-dev.us-west.moz.works/saml2/metadata/
+        - name: SAML_REMOTE_METADATA
+          value: dev.xml
+        - name: SAML_SSO_URL
+          value: https://basket-dev.us-west.moz.works/saml2/acs/
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: basket-dev-secrets
+        - name: SECURE_SSL_REDIRECT
+          value: "False"
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: basket-dev-secrets
+        - name: SFDC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-password
+              name: basket-dev-secrets
+        - name: SFDC_SEC_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-sec-token
+              name: basket-dev-secrets
+        - name: SFDC_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-username
+              name: basket-dev-secrets
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
+        - name: STATSD_HOST
+          value: statsd-exporter-svc.statsdexporter
+        - name: STATSD_PORT
+          value: "9125"
+        - name: STATSD_PREFIX
+          value: basket-dev
+        - name: SUBHUB_OPP_RECORD_TYPE
+          value: 012R0000000dQ4dIAE
+        - name: SUPERTOKEN
+          valueFrom:
+            secretKeyRef:
+              key: supertoken
+              name: basket-dev-secrets
+        - name: SYNC_KEY
+          valueFrom:
+            secretKeyRef:
+              key: sync-key
+              name: basket-dev-secrets
+        - name: TASK_LOCKING_ENABLE
+          value: "True"
+        - name: WSGI_NUM_WORKERS
+          value: "4"
+        image: mozmeao/basket:89c8b691
+        imagePullPolicy: IfNotPresent
+        name: basket-dev-worker
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1200Mi
+          requests:
+            cpu: 250m
+            memory: 600Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

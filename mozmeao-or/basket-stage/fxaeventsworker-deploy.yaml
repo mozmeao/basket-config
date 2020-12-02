@@ -1,0 +1,242 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: basket-stage
+    type: fxaeventsworker
+  name: basket-stage-fxaeventsworker
+  namespace: basket-stage
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: basket-stage
+      type: fxaeventsworker
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: basket-stage
+        type: fxaeventsworker
+      name: basket-stage-fxaeventsworker
+      namespace: basket-stage
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
+      containers:
+      - args:
+        - bin/run-fxa-events-worker.sh
+        command:
+        - /bin/bash
+        - -c
+        env:
+        - name: ADMIN_REDIRECT_URL
+          value: https://admin-stage.basket.moz.works/admin/
+        - name: ALLOWED_HOSTS
+          value: "*"
+        - name: CELERY_ALWAYS_EAGER
+          value: "False"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: basket-stage-secrets
+        - name: DEBUG
+          value: "False"
+        - name: DISABLE_ADMIN
+          value: "True"
+        - name: DONATE_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: donate-access-key-id
+              name: basket-stage-secrets
+        - name: DONATE_CONTACT_RECORD_TYPE
+          value: 0120B0000005iGB
+        - name: DONATE_OPP_RECORD_TYPE
+          value: 0120B000000t6NV
+        - name: DONATE_QUEUE_REGION
+          value: us-east-1
+        - name: DONATE_QUEUE_URL
+          valueFrom:
+            secretKeyRef:
+              key: donate-queue-url
+              name: basket-stage-secrets
+        - name: DONATE_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: donate-secret-access-key
+              name: basket-stage-secrets
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: basket-stage-secrets
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: basket-stage-secrets
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: basket-stage-secrets
+        - name: EMAIL_PORT
+          value: "587"
+        - name: EMAIL_USE_TLS
+          value: "True"
+        - name: ET_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: et-client-id
+              name: basket-stage-secrets
+        - name: ET_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: et-client-secret
+              name: basket-stage-secrets
+        - name: EXTRA_SUPPORTED_LANGS
+          value: zh-tw
+        - name: FXA_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: fxa-client-id
+              name: basket-stage-secrets
+        - name: FXA_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: fxa-client-secret
+              name: basket-stage-secrets
+        - name: FXA_EVENTS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-access-key-id
+              name: basket-stage-secrets
+        - name: FXA_EVENTS_QUEUE_ENABLE
+          value: "True"
+        - name: FXA_EVENTS_QUEUE_REGION
+          value: us-east-1
+        - name: FXA_EVENTS_QUEUE_URL
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-queue-url
+              name: basket-stage-secrets
+        - name: FXA_EVENTS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: fxa-events-secret-access-key
+              name: basket-stage-secrets
+        - name: FXA_OAUTH_SERVER_ENV
+          value: stage
+        - name: KOMBU_FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: kombu-fernet-key
+              name: basket-stage-secrets
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MAINTENANCE_MODE
+          value: "False"
+        - name: MAINTENANCE_READ_ONLY
+          value: "True"
+        - name: NEWRELIC_INI_FILE
+          value: newrelic.ini
+        - name: NEW_RELIC_APP_NAME
+          value: basket-stage-mozmeao-or;basket-stage
+        - name: NEW_RELIC_CONFIG_FILE
+          value: /app/newrelic.ini
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: basket-stage-secrets
+        - name: REDIS_CACHE_DB
+          value: "3"
+        - name: REDIS_CELERY_DB
+          value: "2"
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              key: redis-url
+              name: basket-stage-secrets
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: basket-stage-secrets
+        - name: SECURE_SSL_REDIRECT
+          value: "True"
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: basket-stage-secrets
+        - name: SFDC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-password
+              name: basket-stage-secrets
+        - name: SFDC_SEC_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-sec-token
+              name: basket-stage-secrets
+        - name: SFDC_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: sfdc-username
+              name: basket-stage-secrets
+        - name: SNITCH_ID
+          valueFrom:
+            secretKeyRef:
+              key: snitch-id
+              name: basket-stage-secrets
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
+        - name: STATSD_HOST
+          value: statsd-exporter-svc.statsdexporter
+        - name: STATSD_PORT
+          value: "9125"
+        - name: STATSD_PREFIX
+          value: basket-stage
+        - name: SUBHUB_OPP_RECORD_TYPE
+          value: 0124O000000R0ODQA0
+        - name: SUPERTOKEN
+          valueFrom:
+            secretKeyRef:
+              key: supertoken
+              name: basket-stage-secrets
+        - name: SYNC_KEY
+          valueFrom:
+            secretKeyRef:
+              key: sync-key
+              name: basket-stage-secrets
+        - name: TASK_LOCKING_ENABLE
+          value: "True"
+        - name: WSGI_NUM_WORKERS
+          value: "4"
+        image: mozmeao/basket:89c8b691
+        imagePullPolicy: IfNotPresent
+        name: basket-stage-fxaeventsworker
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
