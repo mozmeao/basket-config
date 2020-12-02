@@ -175,7 +175,7 @@ test prod:
 test mozmeao-fr prod:
   extends: .test
   variables:
-    URL: https://basket-prod.mozmeao-fr.moz.works
+    URL: https://basket-prod.frankfurt.moz.works
   only:
     changes:
       - "mozmeao-fr/basket-prod/*"
