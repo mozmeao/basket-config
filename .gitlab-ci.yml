@@ -70,7 +70,7 @@ deploy mozmeao-fr stage:
   extends: .deploy
   variables:
     DEPLOYMENT: mozmeao-fr/basket-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-fr.kubeconfig
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-fr-1.kubeconfig
   only:
     changes:
       - "mozmeao-fr/basket-stage/*"
