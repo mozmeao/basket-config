@@ -1,33 +1,33 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: basket-stage
+    app: basket-prod
     type: web
-  name: basket-stage-web
-  namespace: basket-stage
+  name: basket-prod-web
+  namespace: basket-prod
 spec:
   progressDeadlineSeconds: 600
-  replicas: 3
+  replicas: 6
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: basket-stage
+      app: basket-prod
       type: web
   strategy:
     rollingUpdate:
-      maxSurge: 3
+      maxSurge: 4
       maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: basket-stage
+        app: basket-prod
         type: web
-      name: basket-stage-web
-      namespace: basket-stage
+      name: basket-prod-web
+      namespace: basket-prod
     spec:
       imagePullSecrets:
         - name: dockerhub-registry
@@ -39,61 +39,92 @@ spec:
         - -c
         env:
         - name: ADMIN_REDIRECT_URL
-          value: https://admin-stage.basket.moz.works/admin/
+          value: https://admin.basket.moz.works/admin/
         - name: ALLOWED_HOSTS
           value: "*"
         - name: CELERY_ALWAYS_EAGER
           value: "False"
         - name: CLUSTER_NAME
-          value: "frankfurt"
+          value: "mozmeao-fr"
+        - name: COMMON_VOICE_BATCH_UPDATES
+          value: "True"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               key: database-url
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: DEBUG
           value: "False"
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: basket-prod-secrets
         - name: EMAIL_HOST_PASSWORD
           valueFrom:
             secretKeyRef:
               key: email-host-password
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: EMAIL_HOST_USER
           valueFrom:
             secretKeyRef:
               key: email-host-user
-              name: basket-stage-secrets
+              name: basket-prod-secrets
+        - name: EMAIL_PORT
+          value: "587"
+        - name: EMAIL_USE_TLS
+          value: "True"
         - name: ET_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: et-client-id
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: ET_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: et-client-secret
-              name: basket-stage-secrets
+              name: basket-prod-secrets
+        - name: EXACTTARGET_CONFIRMATION
+          value: Confirmation
+        - name: EXACTTARGET_DATA
+          value: Master_Subscribers
+        - name: EXACTTARGET_INTERESTS
+          value: GET_INVOLVED
+        - name: EXACTTARGET_OPTIN_STAGE
+          value: Double_Opt_In
+        - name: EXACTTARGET_PASS
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-pass
+              name: basket-prod-secrets
+        - name: EXACTTARGET_USER
+          valueFrom:
+            secretKeyRef:
+              key: exacttarget-user
+              name: basket-prod-secrets
+        - name: EXACTTARGET_USE_SANDBOX
+          value: "False"
         - name: EXTRA_SUPPORTED_LANGS
-          value: "zh-tw"
+          value: zh-tw
         - name: FXA_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: fxa-client-id
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: FXA_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: fxa-client-secret
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: FXA_OAUTH_SERVER_ENV
-          value: "stage"
+          value: production
         - name: HTTPS
           value: "on"
         - name: KOMBU_FERNET_KEY
           valueFrom:
             secretKeyRef:
               key: kombu-fernet-key
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
@@ -105,59 +136,59 @@ spec:
         - name: MAINTENANCE_MODE
           value: "False"
         - name: MAINTENANCE_READ_ONLY
-          value: "True"
+          value: "False"
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-stage-frankfurt;basket-stage
+          value: basket-prod-mozmeao-fr;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: READ_ONLY_MODE
           value: "True"
         - name: REDIS_CACHE_DB
-          value: "3"
+          value: "5"
         - name: REDIS_CELERY_DB
-          value: "2"
+          value: "4"
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
               key: redis-url
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: secret-key
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
               key: sentry-dsn
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: SFDC_PASSWORD
           valueFrom:
             secretKeyRef:
               key: sfdc-password
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: SFDC_SEC_TOKEN
           valueFrom:
             secretKeyRef:
               key: sfdc-sec-token
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: SFDC_USERNAME
           valueFrom:
             secretKeyRef:
               key: sfdc-username
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: SNITCH_ID
           valueFrom:
             secretKeyRef:
               key: snitch-id
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: STATSD_CLIENT
           value: django_statsd.clients.normal
         - name: STATSD_HOST
@@ -165,24 +196,40 @@ spec:
         - name: STATSD_PORT
           value: "9125"
         - name: STATSD_PREFIX
-          value: basket-stage
+          value: basket-prod
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
         - name: SUPERTOKEN
           valueFrom:
             secretKeyRef:
               key: supertoken
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:
               key: sync-key
-              name: basket-stage-secrets
+              name: basket-prod-secrets
         - name: TASK_LOCKING_ENABLE
           value: "True"
-        image: mozmeao/basket:89c8b691
+        - name: TASK_LOCK_TIMEOUT
+          value: "10"
+        - name: WSGI_NUM_WORKERS
+          value: "4"
+        - name: conflicts
+          value: "1"
+        image: mozmeao/basket:9fcaa499
         imagePullPolicy: Always
-        name: basket-stage-web
+        name: basket-prod-web
+        livenessProbe:
+          failureThreshold: 4
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            path: /healthz/
+            scheme: HTTP
+            port: 8000
         readinessProbe:
           failureThreshold: 1
           initialDelaySeconds: 5
@@ -191,7 +238,13 @@ spec:
           tcpSocket:
             port: 8000
           timeoutSeconds: 5
-        resources: {}
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1200Mi
+          requests:
+            cpu: 250m
+            memory: 600Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst

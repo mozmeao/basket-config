@@ -48,7 +48,7 @@ deploy mozmeao-or admin-stage:
   stage: deploy-admin
   variables:
     DEPLOYMENT: mozmeao-or/basket-admin-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or-1.kubeconfig
   only:
     changes:
       - "mozmeao-or/basket-admin-stage/*"
@@ -59,21 +59,21 @@ deploy mozmeao-or stage:
   extends: .deploy
   variables:
     DEPLOYMENT: mozmeao-or/basket-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or-1.kubeconfig
   only:
     changes:
       - "mozmeao-or/basket-stage/*"
     refs:
       - master
 
-deploy frankfurt stage:
+deploy mozmeao-fr stage:
   extends: .deploy
   variables:
-    DEPLOYMENT: frankfurt/basket-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+    DEPLOYMENT: mozmeao-fr/basket-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-fr.kubeconfig
   only:
     changes:
-      - "frankfurt/basket-stage/*"
+      - "mozmeao-fr/basket-stage/*"
     refs:
       - master
 
@@ -82,7 +82,7 @@ deploy mozmeao-or admin:
   stage: deploy-admin
   variables:
     DEPLOYMENT: mozmeao-or/basket-admin
-    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or-1.kubeconfig
   only:
     changes:
       - "mozmeao-or/basket-admin/*"
@@ -93,21 +93,21 @@ deploy mozmeao-or prod:
   extends: .deploy
   variables:
     DEPLOYMENT: mozmeao-or/basket-prod
-    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or.kubeconfig
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-or-1.kubeconfig
   only:
     changes:
       - "mozmeao-or/basket-prod/*"
     refs:
       - master
 
-deploy frankfurt prod:
+deploy mozmeao-fr prod:
   extends: .deploy
   variables:
-    DEPLOYMENT: frankfurt/basket-prod
-    KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+    DEPLOYMENT: mozmeao-fr/basket-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-fr-1.kubeconfig
   only:
     changes:
-      - "frankfurt/basket-prod/*"
+      - "mozmeao-fr/basket-prod/*"
     refs:
       - master
 
@@ -172,12 +172,12 @@ test prod:
     refs:
       - master
 
-test frankfurt prod:
+test mozmeao-fr prod:
   extends: .test
   variables:
-    URL: https://basket-prod.frankfurt.moz.works
+    URL: https://basket-prod.mozmeao-fr.moz.works
   only:
     changes:
-      - "frankfurt/basket-prod/*"
+      - "mozmeao-fr/basket-prod/*"
     refs:
       - master

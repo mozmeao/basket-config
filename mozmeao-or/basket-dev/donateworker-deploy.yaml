@@ -49,7 +49,7 @@ spec:
         - name: CELERY_POOL
           value: prefork
         - name: CLUSTER_NAME
-          value: "oregon-a"
+          value: "mozmeao-or"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -166,7 +166,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-dev-oregon-a;basket-dev
+          value: basket-dev-mozmeao-or;basket-dev
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY

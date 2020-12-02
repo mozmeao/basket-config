@@ -1,23 +1,23 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
     app: basket-stage
-    type: worker
-  name: basket-stage-worker
+    type: web
+  name: basket-stage-web
   namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
-  replicas: 2
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: basket-stage
-      type: worker
+      type: web
   strategy:
     rollingUpdate:
-      maxSurge: 2
+      maxSurge: 3
       maxUnavailable: 0
     type: RollingUpdate
   template:
@@ -25,15 +25,15 @@ spec:
       creationTimestamp: null
       labels:
         app: basket-stage
-        type: worker
-      name: basket-stage-worker
+        type: web
+      name: basket-stage-web
       namespace: basket-stage
     spec:
       imagePullSecrets:
         - name: dockerhub-registry
       containers:
       - args:
-        - bin/run-worker.sh
+        - bin/run-prod.sh
         command:
         - /bin/bash
         - -c
@@ -45,7 +45,7 @@ spec:
         - name: CELERY_ALWAYS_EAGER
           value: "False"
         - name: CLUSTER_NAME
-          value: "frankfurt"
+          value: "mozmeao-fr"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -109,7 +109,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-stage-frankfurt;basket-stage
+          value: basket-stage-mozmeao-fr;basket-stage
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -182,7 +182,15 @@ spec:
           value: "True"
         image: mozmeao/basket:89c8b691
         imagePullPolicy: Always
-        name: basket-stage-worker
+        name: basket-stage-web
+        readinessProbe:
+          failureThreshold: 1
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8000
+          timeoutSeconds: 5
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File

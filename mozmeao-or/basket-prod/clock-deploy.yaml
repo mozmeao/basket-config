@@ -50,7 +50,7 @@ spec:
         - name: CELERY_REDIS_MAX_CONNECTIONS
           value: "5"
         - name: CLUSTER_NAME
-          value: "oregon-a"
+          value: "mozmeao-or"
         - name: COMMON_VOICE_BATCH_PROCESSING
           value: "True"
         - name: COMMON_VOICE_BATCH_CHUNK_SIZE
@@ -222,7 +222,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-oregon-a;basket-prod
+          value: basket-prod-mozmeao-or;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY

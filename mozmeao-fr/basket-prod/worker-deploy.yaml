@@ -1,23 +1,24 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
+  generation: 80
   labels:
     app: basket-prod
-    type: web
-  name: basket-prod-web
+    type: worker
+  name: basket-prod-worker
   namespace: basket-prod
 spec:
   progressDeadlineSeconds: 600
-  replicas: 6
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: basket-prod
-      type: web
+      type: worker
   strategy:
     rollingUpdate:
-      maxSurge: 4
+      maxSurge: 3
       maxUnavailable: 0
     type: RollingUpdate
   template:
@@ -25,15 +26,15 @@ spec:
       creationTimestamp: null
       labels:
         app: basket-prod
-        type: web
-      name: basket-prod-web
+        type: worker
+      name: basket-prod-worker
       namespace: basket-prod
     spec:
       imagePullSecrets:
         - name: dockerhub-registry
       containers:
       - args:
-        - bin/run-prod.sh
+        - bin/run-worker.sh
         command:
         - /bin/bash
         - -c
@@ -45,9 +46,7 @@ spec:
         - name: CELERY_ALWAYS_EAGER
           value: "False"
         - name: CLUSTER_NAME
-          value: "frankfurt"
-        - name: COMMON_VOICE_BATCH_UPDATES
-          value: "True"
+          value: "mozmeao-fr"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -116,6 +115,8 @@ spec:
             secretKeyRef:
               key: fxa-client-secret
               name: basket-prod-secrets
+        - name: FXA_EVENTS_VERIFIED_SFDC_ENABLE
+          value: "True"
         - name: FXA_OAUTH_SERVER_ENV
           value: production
         - name: HTTPS
@@ -140,7 +141,7 @@ spec:
         - name: NEWRELIC_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: basket-prod-frankfurt;basket-prod
+          value: basket-prod-mozmeao-fr;basket-prod
         - name: NEW_RELIC_CONFIG_FILE
           value: /app/newrelic.ini
         - name: NEW_RELIC_LICENSE_KEY
@@ -184,6 +185,8 @@ spec:
             secretKeyRef:
               key: sfdc-username
               name: basket-prod-secrets
+        - name: SFDC_REQUEST_TIMEOUT
+          value: "90"
         - name: SNITCH_ID
           valueFrom:
             secretKeyRef:
@@ -219,32 +222,8 @@ spec:
           value: "1"
         image: mozmeao/basket:9fcaa499
         imagePullPolicy: Always
-        name: basket-prod-web
-        livenessProbe:
-          failureThreshold: 4
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 5
-          httpGet:
-            path: /healthz/
-            scheme: HTTP
-            port: 8000
-        readinessProbe:
-          failureThreshold: 1
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          successThreshold: 1
-          tcpSocket:
-            port: 8000
-          timeoutSeconds: 5
-        resources:
-          limits:
-            cpu: "1"
-            memory: 1200Mi
-          requests:
-            cpu: 250m
-            memory: 600Mi
+        name: basket-prod-worker
+        resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
