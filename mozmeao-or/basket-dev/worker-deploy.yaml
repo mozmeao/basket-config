@@ -40,6 +40,23 @@ spec:
         env:
         - name: ALLOWED_HOSTS
           value: "*"
+        - name: ACOUSTIC_TX_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-tx-client-id
+              name: basket-dev-secrets
+        - name: ACOUSTIC_TX_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-tx-client-secret
+              name: basket-dev-secrets
+        - name: ACOUSTIC_TX_REFRESH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-tx-refresh-token
+              name: basket-dev-secrets
+        - name: ACOUSTIC_TX_SERVER_NUMBER
+          value: "6"
         - name: BUILDPACK_URL
           value: https://github.com/pmclanahan/heroku-buildpack-python-peep
         - name: CELERY_ALWAYS_EAGER
