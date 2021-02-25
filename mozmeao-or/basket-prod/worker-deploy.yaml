@@ -130,6 +130,8 @@ spec:
             secretKeyRef:
               key: donate-snitch-id
               name: basket-prod-secrets
+        - name: DONATE_SEND_RECEIPTS
+          value: "False"
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
