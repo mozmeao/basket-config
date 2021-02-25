@@ -38,6 +38,42 @@ spec:
         - /bin/bash
         - -c
         env:
+        - name: ACOUSTIC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-client-id
+              name: basket-prod-secrets
+        - name: ACOUSTIC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-client-secret
+              name: basket-prod-secrets
+        - name: ACOUSTIC_REFRESH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-refresh-token
+              name: basket-prod-secrets
+        - name: ACOUSTIC_SERVER_NUMBER
+          value: "6"
+        - name: ACOUSTIC_FXA_TABLE_ID
+          value: "1360221"
+        - name: ACOUSTIC_TX_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-tx-client-id
+              name: basket-prod-secrets
+        - name: ACOUSTIC_TX_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-tx-client-secret
+              name: basket-prod-secrets
+        - name: ACOUSTIC_TX_REFRESH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: acoustic-tx-refresh-token
+              name: basket-prod-secrets
+        - name: ACOUSTIC_TX_SERVER_NUMBER
+          value: "6"
         - name: ADMIN_REDIRECT_URL
           value: https://admin.basket.moz.works/admin/
         - name: ALLOWED_HOSTS
