@@ -256,7 +256,7 @@ spec:
           value: "4"
         - name: conflicts
           value: "1"
-        image: mozmeao/basket:32db4375
+        image: mozmeao/basket:c99797b4
         imagePullPolicy: Always
         name: basket-prod-worker
         resources: {}
