@@ -100,7 +100,7 @@ spec:
         - name: DISABLE_ADMIN
           value: "True"
         - name: DJANGO_LOG_LEVEL
-          value: "DEBUG"
+          value: "WARNING"
         - name: DONATE_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
