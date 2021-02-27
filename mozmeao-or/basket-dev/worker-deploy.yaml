@@ -98,7 +98,7 @@ spec:
               key: donate-queue-url
               name: basket-dev-secrets
         - name: DONATE_RECEIPTS_BCC
-          value: "receipt-bcc@mozillafoundation.org"
+          value: ""
         - name: DONATE_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
