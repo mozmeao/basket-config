@@ -86,6 +86,8 @@ spec:
             secretKeyRef:
               key: donate-secret-access-key
               name: basket-prod-secrets
+        - name: DONATE_SEND_RECEIPTS
+          value: "True"
         - name: DONATE_SNITCH_ID
           valueFrom:
             secretKeyRef:
