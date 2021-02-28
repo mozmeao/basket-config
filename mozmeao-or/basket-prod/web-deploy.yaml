@@ -338,7 +338,7 @@ spec:
           value: "4"
         - name: conflicts
           value: "1"
-        image: mozmeao/basket:ef34052d
+        image: mozmeao/basket:f540158d
         imagePullPolicy: IfNotPresent
         name: basket-prod-web
         livenessProbe:
