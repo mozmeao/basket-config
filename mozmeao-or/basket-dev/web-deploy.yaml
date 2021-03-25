@@ -219,6 +219,8 @@ spec:
               name: basket-dev-secrets
         - name: SECURE_SSL_REDIRECT
           value: "False"
+        - name: SEND_CONFIRM_MESSAGES
+          value: "True"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
