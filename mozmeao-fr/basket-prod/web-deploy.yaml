@@ -200,6 +200,8 @@ spec:
             secretKeyRef:
               key: secret-key
               name: basket-prod-secrets
+        - name: SEND_CONFIRM_MESSAGES
+          value: "True"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
