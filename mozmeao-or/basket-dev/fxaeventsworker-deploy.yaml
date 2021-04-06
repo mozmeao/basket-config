@@ -268,7 +268,7 @@ spec:
           value: "True"
         - name: WSGI_NUM_WORKERS
           value: "4"
-        image: mozmeao/basket:922d6b50
+        image: mozmeao/basket:bc8651db
         imagePullPolicy: IfNotPresent
         name: basket-dev-fxaeventsworker
         resources:
