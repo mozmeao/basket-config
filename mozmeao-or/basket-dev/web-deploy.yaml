@@ -51,6 +51,20 @@ spec:
           value: prefork
         - name: CLUSTER_NAME
           value: "mozmeao-or"
+        - name: CTMS_ENV
+          value: ‘stage’
+        - name: CTMS_ENABLED
+          value: True
+        - name: CTMS_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-id
+              name: basket-dev-secrets
+        - name: CTMS_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-secret
+              name: basket-dev-secrets
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
