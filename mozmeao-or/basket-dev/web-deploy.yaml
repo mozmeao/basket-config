@@ -52,7 +52,7 @@ spec:
         - name: CLUSTER_NAME
           value: "mozmeao-or"
         - name: CTMS_ENV
-          value: ‘stage’
+          value: "stage"
         - name: CTMS_ENABLED
           value: True
         - name: CTMS_CLIENT_ID
