@@ -279,7 +279,7 @@ spec:
           value: "True"
         - name: WSGI_NUM_WORKERS
           value: "4"
-        image: mozmeao/basket:c83fc1e2
+        image: mozmeao/basket:57b2b537
         imagePullPolicy: IfNotPresent
         name: basket-dev-web
         livenessProbe:
