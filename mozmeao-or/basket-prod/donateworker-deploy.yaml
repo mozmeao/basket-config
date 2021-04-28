@@ -54,7 +54,7 @@ spec:
         - name: CTMS_ENV
           value: "prod"
         - name: CTMS_ENABLED
-          value: "True"
+          value: "False"
         - name: CTMS_CLIENT_ID
           valueFrom:
             secretKeyRef:
