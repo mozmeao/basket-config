@@ -44,6 +44,20 @@ spec:
           value: "*"
         - name: CELERY_ALWAYS_EAGER
           value: "False"
+        - name: CTMS_ENV
+          value: "prod"
+        - name: CTMS_ENABLED
+          value: "True"
+        - name: CTMS_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-id
+              name: basket-stage-secrets
+        - name: CTMS_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-secret
+              name: basket-stage-secrets
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
