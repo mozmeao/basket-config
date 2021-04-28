@@ -90,6 +90,20 @@ spec:
           value: "True"
         - name: COMMON_VOICE_BATCH_CHUNK_SIZE
           value: "10000"
+        - name: CTMS_ENV
+          value: "prod"
+        - name: CTMS_ENABLED
+          value: "True"
+        - name: CTMS_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-id
+              name: basket-prod-secrets
+        - name: CTMS_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-secret
+              name: basket-prod-secrets
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:

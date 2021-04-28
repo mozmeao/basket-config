@@ -84,6 +84,20 @@ spec:
           value: "mozmeao-fr"
         - name: COMMON_VOICE_BATCH_UPDATES
           value: "True"
+        - name: CTMS_ENV
+          value: "prod"
+        - name: CTMS_ENABLED
+          value: "True"
+        - name: CTMS_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-id
+              name: basket-prod-secrets
+        - name: CTMS_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: ctms-client-secret
+              name: basket-prod-secrets
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
