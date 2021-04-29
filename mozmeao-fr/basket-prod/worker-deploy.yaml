@@ -10,7 +10,7 @@ metadata:
   namespace: basket-prod
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -86,7 +86,7 @@ spec:
         - name: CTMS_ENV
           value: "prod"
         - name: CTMS_ENABLED
-          value: "False"
+          value: "True"
         - name: CTMS_CLIENT_ID
           valueFrom:
             secretKeyRef:
