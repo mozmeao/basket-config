@@ -28,8 +28,10 @@ notify done:
   tags:
     - aws
     - mozmeao
+  before_script:
+    - ./pre-deploy.sh ${DEPLOYMENT}
   script:
-    - kubectl apply -f ${DEPLOYMENT}
+    - ./deploy.sh ${DEPLOYMENT}
     - ./rollout-status.sh ${DEPLOYMENT}
 
 deploy mozmeao-or dev:

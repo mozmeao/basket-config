@@ -1,0 +1,82 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: basket-dev-pre-deploy-ce943949
+  namespace: basket-dev
+spec:
+  template:
+    spec:
+      containers:
+      - name: basket-dev-pre-deploy
+        args:
+        - bin/run-pre-deploy.sh
+        command:
+        - /bin/bash
+        - -c
+        image: mozmeao/basket:ce943949
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ALLOWED_HOSTS
+          value: "*"
+        - name: CELERY_ALWAYS_EAGER
+          value: "False"
+        - name: CELERY_NUM_WORKERS
+          value: "4"
+        - name: CELERY_POOL
+          value: prefork
+        - name: CLUSTER_NAME
+          value: "mozmeao-or"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: basket-dev-secrets
+        - name: DEBUG
+          value: "False"
+        - name: EXTRA_SUPPORTED_LANGS
+          value: zh-tw
+        - name: KOMBU_FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: kombu-fernet-key
+              name: basket-dev-secrets
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NEWRELIC_INI_FILE
+          value: newrelic.ini
+        - name: NEW_RELIC_APP_NAME
+          value: basket-dev-mozmeao-or;basket-dev
+        - name: NEW_RELIC_CONFIG_FILE
+          value: /app/newrelic.ini
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: basket-dev-secrets
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: basket-dev-secrets
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: basket-dev-secrets
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
+        - name: STATSD_HOST
+          value: statsd-exporter-svc.statsdexporter
+        - name: STATSD_PORT
+          value: "9125"
+        - name: STATSD_PREFIX
+          value: basket-dev
+      restartPolicy: Never
+  backoffLimit: 2
+  activeDeadlineSeconds: 20
