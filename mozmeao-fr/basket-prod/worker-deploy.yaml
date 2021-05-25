@@ -222,6 +222,8 @@ spec:
             secretKeyRef:
               key: sentry-dsn
               name: basket-prod-secrets
+        - name: SFDC_ENABLED
+          value: "False"
         - name: SFDC_PASSWORD
           valueFrom:
             secretKeyRef:
