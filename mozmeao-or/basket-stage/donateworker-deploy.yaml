@@ -9,7 +9,7 @@ metadata:
   namespace: basket-stage
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -62,6 +62,8 @@ spec:
           value: 0120B0000005iGB
         - name: DONATE_OPP_RECORD_TYPE
           value: 0120B000000t6NV
+        - name: DONATE_QUEUE_IGNORE_MODE
+          value: "True"
         - name: DONATE_QUEUE_REGION
           value: us-east-1
         - name: DONATE_QUEUE_URL
