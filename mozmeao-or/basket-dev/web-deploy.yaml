@@ -144,6 +144,8 @@ spec:
           value: "True"
         - name: EXTRA_SUPPORTED_LANGS
           value: zh-tw
+        - name: FXA_EMAIL_PREFS_DOMAIN
+          value: "www-dev.allizom.org"
         - name: FXA_EVENTS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
