@@ -196,7 +196,7 @@ spec:
               name: basket-stage-secrets
         - name: TASK_LOCKING_ENABLE
           value: "True"
-        image: mozmeao/basket:bef6f03a
+        image: mozmeao/basket:d0791328
         imagePullPolicy: Always
         name: basket-stage-web
         readinessProbe:
