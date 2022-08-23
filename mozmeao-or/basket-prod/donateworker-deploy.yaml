@@ -128,34 +128,6 @@ spec:
           value: "587"
         - name: EMAIL_USE_TLS
           value: "True"
-        - name: ET_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: et-client-id
-              name: basket-prod-secrets
-        - name: ET_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: et-client-secret
-              name: basket-prod-secrets
-        - name: EXACTTARGET_CONFIRMATION
-          value: Confirmation
-        - name: EXACTTARGET_DATA
-          value: Master_Subscribers
-        - name: EXACTTARGET_INTERESTS
-          value: GET_INVOLVED
-        - name: EXACTTARGET_OPTIN_STAGE
-          value: Double_Opt_In
-        - name: EXACTTARGET_PASS
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-pass
-              name: basket-prod-secrets
-        - name: EXACTTARGET_USER
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-user
-              name: basket-prod-secrets
         - name: EXACTTARGET_USE_SANDBOX
           value: "False"
         - name: EXTRA_SUPPORTED_LANGS
@@ -300,11 +272,6 @@ spec:
           value: basket-prod
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
-        - name: SUPERTOKEN
-          valueFrom:
-            secretKeyRef:
-              key: supertoken
-              name: basket-prod-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:

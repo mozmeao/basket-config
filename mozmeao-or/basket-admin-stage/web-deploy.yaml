@@ -75,16 +75,6 @@ spec:
           value: "True"
         - name: ENFORCE_HOSTNAME
           value: admin-stage.basket.moz.works
-        - name: ET_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: et-client-id
-              name: basket-admin-stage-secrets
-        - name: ET_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: et-client-secret
-              name: basket-admin-stage-secrets
         - name: K8S_NAMESPACE
           valueFrom:
             fieldRef:
@@ -183,11 +173,6 @@ spec:
           value: basket-admin-stage
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
-        - name: SUPERTOKEN
-          valueFrom:
-            secretKeyRef:
-              key: supertoken
-              name: basket-admin-stage-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:

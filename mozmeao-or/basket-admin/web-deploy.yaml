@@ -75,34 +75,6 @@ spec:
           value: "True"
         - name: ENFORCE_HOSTNAME
           value: admin.basket.moz.works
-        - name: ET_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: et-client-id
-              name: basket-admin-secrets
-        - name: ET_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: et-client-secret
-              name: basket-admin-secrets
-        - name: EXACTTARGET_CONFIRMATION
-          value: Confirmation
-        - name: EXACTTARGET_DATA
-          value: Master_Subscribers
-        - name: EXACTTARGET_INTERESTS
-          value: GET_INVOLVED
-        - name: EXACTTARGET_OPTIN_STAGE
-          value: Double_Opt_In
-        - name: EXACTTARGET_PASS
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-pass
-              name: basket-admin-secrets
-        - name: EXACTTARGET_USER
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-user
-              name: basket-admin-secrets
         - name: EXACTTARGET_USE_SANDBOX
           value: "False"
         - name: KOMBU_FERNET_KEY
@@ -206,11 +178,6 @@ spec:
           value: basket-admin
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
-        - name: SUPERTOKEN
-          valueFrom:
-            secretKeyRef:
-              key: supertoken
-              name: basket-admin-secrets
         - name: TASK_LOCKING_ENABLE
           value: "True"
         - name: WSGI_NUM_WORKERS

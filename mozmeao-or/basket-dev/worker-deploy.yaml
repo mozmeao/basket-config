@@ -140,24 +140,6 @@ spec:
               name: basket-dev-secrets
         - name: EMAIL_USE_TLS
           value: "True"
-        - name: EXACTTARGET_CONFIRMATION
-          value: Confirmation
-        - name: EXACTTARGET_DATA
-          value: Master_Subscribers
-        - name: EXACTTARGET_INTERESTS
-          value: GET_INVOLVED
-        - name: EXACTTARGET_OPTIN_STAGE
-          value: Double_Opt_In
-        - name: EXACTTARGET_PASS
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-pass
-              name: basket-dev-secrets
-        - name: EXACTTARGET_USER
-          valueFrom:
-            secretKeyRef:
-              key: exacttarget-user
-              name: basket-dev-secrets
         - name: EXACTTARGET_USE_SANDBOX
           value: "True"
         - name: EXTRA_SUPPORTED_LANGS
@@ -287,11 +269,6 @@ spec:
           value: basket-dev
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 012R0000000dQ4dIAE
-        - name: SUPERTOKEN
-          valueFrom:
-            secretKeyRef:
-              key: supertoken
-              name: basket-dev-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:
