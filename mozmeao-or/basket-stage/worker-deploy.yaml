@@ -107,16 +107,6 @@ spec:
           value: "587"
         - name: EMAIL_USE_TLS
           value: "True"
-        - name: ET_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: et-client-id
-              name: basket-stage-secrets
-        - name: ET_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: et-client-secret
-              name: basket-stage-secrets
         - name: EXTRA_SUPPORTED_LANGS
           value: zh-tw
         - name: FXA_CLIENT_ID
@@ -231,11 +221,6 @@ spec:
           value: basket-stage
         - name: SUBHUB_OPP_RECORD_TYPE
           value: 0124O000000R0ODQA0
-        - name: SUPERTOKEN
-          valueFrom:
-            secretKeyRef:
-              key: supertoken
-              name: basket-stage-secrets
         - name: SYNC_KEY
           valueFrom:
             secretKeyRef:
