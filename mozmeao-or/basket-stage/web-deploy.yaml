@@ -157,6 +157,8 @@ spec:
             secretKeyRef:
               key: fxa-client-secret
               name: basket-stage-secrets
+        - name: FXA_EMAIL_PREFS_DOMAIN
+          value: "www.allizom.org"
         - name: FXA_EVENTS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
