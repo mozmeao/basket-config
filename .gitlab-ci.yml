@@ -8,7 +8,7 @@ stages:
 notify start:
   stage: pre-notify
   only:
-    - master
+    - main
   tags:
     - aws
     - mozmeao
@@ -17,7 +17,7 @@ notify start:
 notify done:
   stage: post-notify
   only:
-    - master
+    - main
   tags:
     - aws
     - mozmeao
@@ -41,7 +41,7 @@ deploy mozmeao-or dev:
     changes:
       - "mozmeao-or/basket-dev/*"
     refs:
-      - master
+      - main
 
 deploy mozmeao-or admin-stage:
   extends: .deploy
@@ -53,7 +53,7 @@ deploy mozmeao-or admin-stage:
     changes:
       - "mozmeao-or/basket-admin-stage/*"
     refs:
-      - master
+      - main
 
 deploy mozmeao-or stage:
   extends: .deploy
@@ -64,7 +64,7 @@ deploy mozmeao-or stage:
     changes:
       - "mozmeao-or/basket-stage/*"
     refs:
-      - master
+      - main
 
 deploy mozmeao-fr stage:
   extends: .deploy
@@ -75,7 +75,7 @@ deploy mozmeao-fr stage:
     changes:
       - "mozmeao-fr/basket-stage/*"
     refs:
-      - master
+      - main
 
 deploy mozmeao-or admin:
   extends: .deploy
@@ -87,7 +87,7 @@ deploy mozmeao-or admin:
     changes:
       - "mozmeao-or/basket-admin/*"
     refs:
-      - master
+      - main
 
 deploy mozmeao-or prod:
   extends: .deploy
@@ -98,7 +98,7 @@ deploy mozmeao-or prod:
     changes:
       - "mozmeao-or/basket-prod/*"
     refs:
-      - master
+      - main
 
 deploy mozmeao-fr prod:
   extends: .deploy
@@ -109,7 +109,7 @@ deploy mozmeao-fr prod:
     changes:
       - "mozmeao-fr/basket-prod/*"
     refs:
-      - master
+      - main
 
 .test:
   stage: test
@@ -130,7 +130,7 @@ test dev:
     changes:
       - "oregon-*/basket-dev/*"
     refs:
-      - master
+      - main
 
 test admin-stage:
   extends: .test
@@ -140,7 +140,7 @@ test admin-stage:
     changes:
       - "oregon-*/basket-admin-stage/*"
     refs:
-      - master
+      - main
 
 test stage:
   extends: .test
@@ -150,7 +150,7 @@ test stage:
     changes:
       - "oregon-*/basket-stage/*"
     refs:
-      - master
+      - main
 
 test admin:
   extends: .test
@@ -160,7 +160,7 @@ test admin:
     changes:
       - "oregon-*/basket-admin/*"
     refs:
-      - master
+      - main
 
 test prod:
   extends: .test
@@ -170,7 +170,7 @@ test prod:
     changes:
       - "oregon-*/basket-prod/*"
     refs:
-      - master
+      - main
 
 test mozmeao-fr prod:
   extends: .test
@@ -180,4 +180,4 @@ test mozmeao-fr prod:
     changes:
       - "mozmeao-fr/basket-prod/*"
     refs:
-      - master
+      - main
